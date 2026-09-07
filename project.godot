@@ -1,0 +1,70 @@
+; ForestTales Phase 0 project configuration.
+; Runtime combat rules are intentionally not implemented in this phase.
+config_version=5
+
+[application]
+
+config/name="ForestTales"
+run/main_scene="res://scenes/main.tscn"
+config/icon="res://assets/app_icon.svg"
+config/features=PackedStringArray("4.7", "GL Compatibility")
+
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/size/window_width_override=1280
+window/size/window_height_override=720
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
+window/handheld/orientation=0
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+textures/default_filters/use_nearest_mipmap_filter=false
+textures/vram_compression/import_etc2_astc=true
+
+[environment]
+
+defaults/default_clear_color=Color(0.086, 0.125, 0.2, 1)
+
+[input]
+
+move_left={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"physical_keycode":65), Object(InputEventKey,"physical_keycode":4194311), Object(InputEventJoypadMotion,"axis":0,"axis_value":-1.0)]
+}
+move_right={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"physical_keycode":68), Object(InputEventKey,"physical_keycode":4194313), Object(InputEventJoypadMotion,"axis":0,"axis_value":1.0)]
+}
+jump={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"physical_keycode":32), Object(InputEventJoypadButton,"button_index":0)]
+}
+dash={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"physical_keycode":4194321), Object(InputEventJoypadButton,"button_index":2)]
+}
+attack_light={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"physical_keycode":74), Object(InputEventJoypadButton,"button_index":1)]
+}
+attack_heavy={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"physical_keycode":75), Object(InputEventJoypadButton,"button_index":3)]
+}
+attack_special={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"physical_keycode":76), Object(InputEventJoypadButton,"button_index":5)]
+}
+
+[layer_names]
+
+2d_physics/layer_1="World"
+2d_physics/layer_2="FighterBody"
+2d_physics/layer_3="Hurtbox"
+2d_physics/layer_4="Hitbox"
+2d_physics/layer_5="RingOut"
