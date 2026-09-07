@@ -2,7 +2,7 @@
 
 ## 최종 상태
 
-로컬 구현·자동 검사·Android 에뮬레이터 검증 pass. 실제 기기 검증은 명시적 이연이며 원격 버전 관리 완료 조건은 blocked다.
+로컬 구현·자동 검사·Android 에뮬레이터 검증 pass. 실제 기기 검증은 명시적 이연이며 Phase 0은 원격 `develop`에 통합됐다.
 
 ## 결과
 
@@ -26,12 +26,12 @@
 ## 버전 관리와 롤백
 
 - 사용자 승인으로 Git 저장소와 `origin`을 구성했고 Phase 0 변경은 `feature/phase-0-foundation`에 격리했다.
-- 구현 commit은 `4c5600c`, 원격 `develop` 기준은 `765dec1`이다.
-- feature branch 공개 push와 PR/병합은 전체 63개 프로젝트 파일 공개에 대한 사용자 명시 승인 대기 상태다.
+- 구현 commit은 `4c5600c`, 통합 기록 commit은 `2b41963`, PR #1 병합 commit은 `755b6bc`이다.
+- 원격 `develop`은 `755b6bc`이며 PR #1은 병합·종료됐다.
 - 최종 롤백은 병합 commit의 revert로 수행한다.
 
 ## 다음 게이트
 
 - 완료: ADR-001/002/003 Phase 1 전투 기본안 승인.
 - 완료: package ID `com.foresttales.welllbeing`과 Galaxy S23 Ultra 기준대상 확정.
-- Git 저장소와 origin/develop 경로를 마련한다.
+- Git 저장소와 origin/develop 경로를 마련했다. Phase 1은 `develop` 기준 새 feature 브랜치에서 시작한다.
