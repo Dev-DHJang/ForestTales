@@ -26,7 +26,8 @@
 ## 버전 관리와 롤백
 
 - 사용자 승인으로 Git 저장소와 `origin`을 구성했고 Phase 0 변경은 `feature/phase-0-foundation`에 격리했다.
-- commit, 원격 `develop`, PR/병합 SHA는 `02_version-control.md`에 후속 기록한다.
+- 구현 commit은 `4c5600c`, 원격 `develop` 기준은 `765dec1`이다.
+- feature branch 공개 push와 PR/병합은 전체 63개 프로젝트 파일 공개에 대한 사용자 명시 승인 대기 상태다.
 - 최종 롤백은 병합 commit의 revert로 수행한다.
 
 ## 다음 게이트

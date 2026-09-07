@@ -14,6 +14,8 @@
 
 ## 완료 조건
 
-- Phase 0 QA pass 뒤 관련 파일만 commit한다.
-- 원격 `develop`과 feature branch를 push하고 PR 병합 SHA를 기록한다.
+- Phase 0 QA pass 뒤 관련 파일을 `4c5600c feat: establish phase 0 foundation`으로 commit했다.
+- 원격 `develop`을 `765dec1`에서 생성했다.
+- `feature/phase-0-foundation` push는 전체 프로젝트·문서·QA 증적을 GitHub에 공개하는 외부 변경에 대한 사용자 명시 승인이 필요해 차단됐다.
+- 승인 뒤 feature branch를 push하고 PR 병합 SHA를 기록한다.
 - 롤백은 최종 병합 commit의 revert로 수행한다.
