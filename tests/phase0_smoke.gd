@@ -1,7 +1,7 @@
 extends SceneTree
 
 const REQUIRED_ACTIONS: Array[StringName] = [
-	&"move_left", &"move_right", &"jump", &"dash", &"attack_light", &"attack_heavy", &"attack_special"
+	&"move_left", &"move_right", &"move_up", &"move_down", &"jump", &"dash", &"attack_light", &"attack_heavy", &"attack_special"
 ]
 
 
@@ -25,20 +25,20 @@ func _initialize() -> void:
 		root.add_child(instance)
 		await process_frame
 		for node_path: NodePath in [
-			NodePath("World/Ground"), NodePath("World/Platform"), NodePath("World/PlayerStub"),
-			NodePath("World/TrainingStub"), NodePath("Camera2D"), NodePath("Interface/TouchCommandSource")
+			NodePath("World/Ground"), NodePath("World/Platform"), NodePath("World/Player"),
+			NodePath("World/TrainingDummy"), NodePath("MatchController"), NodePath("Camera2D"), NodePath("Interface/TouchCommandSource")
 		]:
 			if instance.get_node_or_null(node_path) == null:
 				failures.append("missing scene node: %s" % node_path)
 		var touch_source := instance.get_node("Interface/TouchCommandSource")
 		var viewport_size: Vector2 = touch_source.get_viewport_rect().size
-		if touch_source.call("_action_for_position", Vector2(viewport_size.x * 0.02, viewport_size.y * 0.9)) != &"":
+		if touch_source.call("_action_for", Vector2(viewport_size.x * 0.02, viewport_size.y * 0.9)) != &"":
 			failures.append("safe edge accepted a touch action")
-		if touch_source.call("_action_for_position", Vector2(viewport_size.x * 0.1, viewport_size.y * 0.9)) != &"move_left":
+		if touch_source.call("_action_for", Vector2(viewport_size.x * 0.1, viewport_size.y * 0.9)) != &"move_left":
 			failures.append("left touch region mapping is incorrect")
-		touch_source.call("_press_touch", 10, &"jump")
-		touch_source.call("_press_touch", 11, &"jump")
-		touch_source.call("_release_touch", 10)
+		touch_source.call("_press", 10, &"jump")
+		touch_source.call("_press", 11, &"jump")
+		touch_source.call("_release", 10)
 		if not Input.is_action_pressed(&"jump"):
 			failures.append("releasing one pointer cleared another pointer action")
 		touch_source.call("release_all_touches")

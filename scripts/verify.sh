@@ -3,6 +3,8 @@ set -eu
 
 godot --headless --path . --editor --quit
 godot --headless --path . --script res://tests/phase0_smoke.gd
+godot --headless --path . --script res://tests/phase1_combat_contract.gd
+godot --headless --path . --script res://tests/phase1_match_rules.gd
 godot --headless --path . --script res://tests/character_data_contract.gd
 godot --headless --path . --script res://tests/character_appearance_contract.gd
 godot --headless --path . --script res://tests/character_motion_contract.gd
@@ -11,4 +13,4 @@ godot --headless --path . --script res://tests/combat_concept_contract.gd
 godot --headless --path . --script res://tests/ui_design_contract.gd
 ./scripts/verify-harness.sh
 
-echo "Forest Arena Phase 0 verification passed."
+echo "Forest Arena Phase 1 verification passed."
