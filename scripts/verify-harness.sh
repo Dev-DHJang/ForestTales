@@ -24,6 +24,7 @@ for path in \
   docs/06_roadmap_and_acceptance.md \
   docs/07_ai_development_guide.md \
   docs/DECISIONS.md \
+  docs/character-appearance-v01.json \
   docs/ui/non-combat-ui-v01.json \
   docs/ui/penpot-setup.md \
   tests/ui_design_contract.gd \
@@ -94,6 +95,21 @@ grep -q '사용자 승인 전 assets/character/ 등록 금지' docs/harness/fore
 grep -qF '사용자의 명시적 승인 전에는 `assets/character/` 또는 그 manifest에 쓰지 않는다' \
   .agents/skills/forest-arena-character-design/SKILL.md ||
   fail "character-design skill missing approval gate"
+for requirement in '성인 여부' '인간형/수인화 수준' '각도 한정 특징' '금지 신체 구조' '고정 의상 요소' '가변 의상 요소'
+do
+  grep -qF "$requirement" .agents/skills/forest-arena-character-design/references/concept-prompt-template.md ||
+    fail "character-design prompt missing appearance input: $requirement"
+done
+grep -qF '명시적으로 허용되지 않은 귀·꼬리·모피·주둥이·동물형 손발·역관절 다리를 자동으로 추가하지 않는다' \
+  .agents/skills/forest-arena-character-design/references/concept-prompt-template.md ||
+  fail "character-design prompt missing explicit animal-feature gate"
+for consumer in character-design character-motion image-design 2d-animation
+do
+  grep -qF 'docs/character-appearance-v01.json' ".agents/skills/forest-arena-$consumer/SKILL.md" ||
+    fail "appearance contract consumer is missing: $consumer"
+done
+grep -qF '승인 캐릭터 외형 경계' docs/harness/forest-arena/team-spec.md ||
+  fail "team spec missing approved appearance-contract route"
 grep -q '캐릭터 idle·jump·run 모션' docs/harness/forest-arena/team-spec.md ||
   fail "team spec missing character-motion route"
 grep -q '모션별 사용자 명시 승인 전에는 `assets/character/<character-id>/animation/runtime/` 또는 manifest에 쓰지 않는다' \

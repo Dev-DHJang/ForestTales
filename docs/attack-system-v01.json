@@ -107,7 +107,6 @@
       "aerial_profile":"claw-led short-range finishers",
       "directional_attack_profile":"up light: short upward claw; up heavy: double upward rake; down light: low claw check; down heavy: broad low rake",
       "throws":"forward/back throws press ring-out",
-      "appearance_guardrail":"v05 chibi human-form fighter; approved white cat ears and long white tail are retained, while human face, hands, feet, and body shape remain primary; no fur limbs, paw feet, or animal legs are added",
       "moves":[
         {"id":"nabi-light-combo-01","input":"light","state":"ground","role":"claw jab while off-hand guards","combo_index":1,"link_condition":"light/strong/special branch window on hit","resource":"none","launch_direction":"short-side","finisher":false,"visual_state_id":"attack_light_combo_01"},
         {"id":"nabi-light-combo-02","input":"light","state":"ground","role":"large crossed claw rake","combo_index":2,"link_condition":"none","resource":"none","launch_direction":"strong-side","finisher":true,"visual_state_id":"attack_light_combo_02"},

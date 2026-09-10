@@ -20,6 +20,7 @@ Forest Arena는 독창적인 3등신 동물 캐릭터가 싸우는 Godot 4 기�
 - [기능과 UX](docs/03_features_and_ux.md)
 - [기술 아키텍처](docs/04_technical_architecture.md)
 - [콘텐츠·아트·오디오](docs/05_content_art_audio.md)
+- [캐릭터 외형 계약 v01](docs/character-appearance-v01.json)
 - [로드맵과 수용 기준](docs/06_roadmap_and_acceptance.md)
 - [AI 개발 가이드](docs/07_ai_development_guide.md)
 - [결정 기록](docs/DECISIONS.md)
@@ -33,7 +34,7 @@ Forest Arena는 독창적인 3등신 동물 캐릭터가 싸우는 Godot 4 기�
     ./scripts/export-debug-android.sh
     ./scripts/verify-android-emulator.sh
 
-`./scripts/verify.sh`는 headless 편집기 로드, Phase 0 smoke, manifest 기반 CharacterData·승인 모션 계약, 공격·비전투 UI 설계 계약, 하네스 구조 검사를 묶는 기본 로컬 검증이다. `./scripts/verify-harness.sh`는 스킬·문서·라우팅만 빠르게 확인한다.
+`./scripts/verify.sh`는 headless 편집기 로드, Phase 0 smoke, manifest 기반 CharacterData·캐릭터 외형·승인 모션 계약, 공격·비전투 UI 설계 계약, 하네스 구조 검사를 묶는 기본 로컬 검증이다. `./scripts/verify-harness.sh`는 스킬·문서·라우팅만 빠르게 확인한다.
 
 ## 현재 상태
 

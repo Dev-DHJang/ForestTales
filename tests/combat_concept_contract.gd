@@ -155,8 +155,6 @@ func _validate_characters(concept: Dictionary, failures: PackedStringArray) -> v
 		for profile_key: String in ["identity", "aerial_profile", "directional_attack_profile", "throws"]:
 			if not character.has(profile_key) or str(character[profile_key]).is_empty():
 				failures.append("character attack profile is missing %s: %s" % [profile_key, character_id])
-		if character_id == "nabi":
-			_validate_nabi_appearance_guardrail(character, failures)
 		var combo_indices: Dictionary = {}
 		var combo_finishers: Dictionary = {}
 		for move_value: Variant in character.get("moves", []):
@@ -179,21 +177,6 @@ func _validate_characters(concept: Dictionary, failures: PackedStringArray) -> v
 	for required_id: String in REQUIRED_CHARACTER_MOVE_IDS:
 		if not all_move_ids.has(required_id):
 			failures.append("required character move is missing: %s" % required_id)
-
-
-func _validate_nabi_appearance_guardrail(character: Dictionary, failures: PackedStringArray) -> void:
-	var guardrail := String(character.get("appearance_guardrail", ""))
-	var required_phrases := [
-		"v05 chibi human-form fighter",
-		"white cat ears",
-		"long white tail",
-		"no fur limbs",
-		"paw feet",
-		"animal legs",
-	]
-	for phrase: String in required_phrases:
-		if not guardrail.contains(phrase):
-			failures.append("Nabi v05 appearance guardrail is missing: %s" % phrase)
 
 
 func _validate_move(move: Dictionary, ids: Dictionary, failures: PackedStringArray) -> void:

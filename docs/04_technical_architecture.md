@@ -20,7 +20,9 @@
 | AccessoryData | 기본 변경, 기술 패치, 조건 효과와 태그 시너지 |
 | StageData | 경기장 ID, 플랫폼, 스폰, 링아웃 경계와 시각 참조 |
 
-캐릭터의 단일 저작 출처는 `assets/character/<character-id>/character.tres`의 CharacterData다. 이 Resource는 콘셉트 이미지 참조, 설정, 역할, 태그, 기술·패시브·직업 확장 슬롯과 기본 CharacterStats를 함께 소유한다. PNG와 이후의 애니메이션은 별도 자산 파일로 두되 CharacterData가 참조하며, 시각 자산은 판정·공격 타이밍·승패의 권위가 아니다.
+캐릭터 Resource 데이터의 단일 저작 출처는 `assets/character/<character-id>/character.tres`의 CharacterData다. 이 Resource는 콘셉트 이미지 참조·요약, 설정, 역할, 태그, 기술·패시브·직업 확장 슬롯과 기본 CharacterStats를 함께 소유한다. PNG와 이후의 애니메이션은 별도 자산 파일로 두되 CharacterData가 참조하며, 시각 자산은 판정·공격 타이밍·승패의 권위가 아니다.
+
+`docs/character-appearance-v01.json`은 승인 로스터의 외형 경계와 작은 화면 식별 규칙을 소유한다. `character_id`와 `concept_asset_id`로 CharacterData·manifest의 승인 콘셉트와 연결하지만 Resource 또는 manifest 스키마를 확장하지 않는다. 외형 계약은 표현 소비자만 사용하며 전투 JSON과 런타임 프로필에는 복제하지 않는다.
 
 조합 순서는 CharacterData, 누적 JobData, AccessoryData이며 결과는 RuntimeCombatProfile이다. 정확한 병합 우선순위와 실패 방식은 Phase 2 계약에서 버전과 함께 확정한다.
 

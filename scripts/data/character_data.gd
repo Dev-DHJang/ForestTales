@@ -1,8 +1,9 @@
 class_name CharacterData
 extends Resource
 
-## The sole authored definition for one playable character. Visual references
-## are presentation-only and must never decide combat timing or hit results.
+## The sole authored Resource profile for one playable character. Detailed
+## appearance rules live in the versioned appearance contract; visual data is
+## presentation-only and must never decide combat timing or hit results.
 @export var schema_version: int = 1
 @export var character_id: StringName
 @export var display_name: String = ""
