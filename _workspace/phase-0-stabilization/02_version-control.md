@@ -14,6 +14,15 @@
 - QA pass 뒤 feature 브랜치를 push하고 일반 merge commit PR로 `develop`에 병합한다.
 - 병합 뒤 로컬 `develop`을 `origin/develop` 추적으로 교정하고 fast-forward한다.
 
-## 증적과 롤백
+## 통합 증적
 
-commit SHA, PR, merge SHA와 최종 검증 결과는 검증 후 이 문서와 closeout에 추가한다. 롤백은 `develop`의 안정화 merge commit을 revert하며 `main`에는 영향을 주지 않는다.
+- 기존 Phase 0 병합 기록 후속: `bffc466`.
+- Forest Arena Phase 0 기준선 통합: `714da64`.
+- 안정화 검증 증적: `167a5e5`.
+- 구현 PR: [#2](https://github.com/Dev-DHJang/ForestTales/pull/2), base `develop`, head `feature/phase-0-stabilization`, CLEAN/MERGEABLE 확인 뒤 일반 merge commit으로 병합.
+- 구현 merge commit: `c066fdf0d0999202342e74f03553a7b2002c440e`.
+- 로컬 `develop` 추적을 `origin/main`에서 `origin/develop`로 교정하고 구현 merge commit까지 fast-forward했다.
+
+## 롤백
+
+구현 롤백은 `develop`의 `c066fdf0d0999202342e74f03553a7b2002c440e`를 revert한다. `main`과 릴리스 태그에는 영향을 주지 않는다.
