@@ -26,7 +26,9 @@ func _initialize() -> void:
 		await process_frame
 		for node_path: NodePath in [
 			NodePath("World/Ground"), NodePath("World/Platform"), NodePath("World/Player"),
-			NodePath("World/TrainingDummy"), NodePath("MatchController"), NodePath("Camera2D"), NodePath("Interface/TouchCommandSource")
+			NodePath("World/TrainingDummy"), NodePath("World/KillVolumes/Left"), NodePath("World/KillVolumes/Right"),
+			NodePath("World/KillVolumes/Top"), NodePath("World/KillVolumes/Bottom"), NodePath("MatchController"),
+			NodePath("Camera2D"), NodePath("Interface/TouchCommandSource"), NodePath("Interface/DebugReadout")
 		]:
 			if instance.get_node_or_null(node_path) == null:
 				failures.append("missing scene node: %s" % node_path)
@@ -36,14 +38,27 @@ func _initialize() -> void:
 			failures.append("safe edge accepted a touch action")
 		if touch_source.call("_action_for", Vector2(viewport_size.x * 0.1, viewport_size.y * 0.9)) != &"move_left":
 			failures.append("left touch region mapping is incorrect")
+		if touch_source.call("_action_for", Vector2(viewport_size.x * 0.43, viewport_size.y * 0.75)) != &"move_right":
+			failures.append("right touch region mapping is incorrect")
+		if touch_source.call("_action_for", Vector2(viewport_size.x * 0.275, viewport_size.y * 0.62)) != &"move_up":
+			failures.append("up touch region mapping is incorrect")
+		if touch_source.call("_action_for", Vector2(viewport_size.x * 0.275, viewport_size.y * 0.91)) != &"move_down":
+			failures.append("down touch region mapping is incorrect")
+		if touch_source.call("_action_for", Vector2(viewport_size.x * 0.275, viewport_size.y * 0.757)) != &"":
+			failures.append("D-pad dead zone accepted an action")
 		touch_source.call("_press", 10, &"jump")
 		touch_source.call("_press", 11, &"jump")
+		touch_source.call("_press", 12, &"move_right")
 		touch_source.call("_release", 10)
 		if not Input.is_action_pressed(&"jump"):
 			failures.append("releasing one pointer cleared another pointer action")
+		if not Input.is_action_pressed(&"move_right"):
+			failures.append("direction and action multitouch did not coexist")
 		touch_source.call("release_all_touches")
 		if Input.is_action_pressed(&"jump"):
 			failures.append("release_all_touches left a synthetic action pressed")
+		if Input.is_action_pressed(&"move_right"):
+			failures.append("release_all_touches left movement pressed")
 		instance.queue_free()
 
 	if failures.is_empty():

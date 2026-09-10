@@ -1,19 +1,236 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=21 format=3]
 
 [ext_resource type="Script" path="res://scripts/fighter_controller.gd" id="1_controller"]
 [ext_resource type="Resource" path="res://assets/character/myo-ryung/character.tres" id="2_character"]
-[sub_resource type="RectangleShape2D" id="1_shape"]
+[ext_resource type="Script" path="res://scripts/data/attack_data.gd" id="3_attack"]
+[sub_resource type="RectangleShape2D" id="BodyShape"]
 size = Vector2(54, 96)
+[sub_resource type="RectangleShape2D" id="HitShape"]
+size = Vector2(60, 50)
+[sub_resource type="Resource" id="L1"]
+script=ExtResource("3_attack")
+attack_id=&"myo-ryung-light-01"
+action_id=&"attack_light"
+combo_step=1
+startup_ticks=4
+active_ticks=3
+recovery_ticks=7
+damage=4.0
+base_knockback=120.0
+knockback_growth=1.6
+visual_state_id=&"attack_light_combo_01"
+[sub_resource type="Resource" id="L2"]
+script=ExtResource("3_attack")
+attack_id=&"myo-ryung-light-02"
+action_id=&"attack_light"
+combo_step=2
+startup_ticks=4
+active_ticks=3
+recovery_ticks=7
+damage=4.0
+base_knockback=120.0
+knockback_growth=1.6
+visual_state_id=&"attack_light_combo_02"
+[sub_resource type="Resource" id="L3"]
+script=ExtResource("3_attack")
+attack_id=&"myo-ryung-light-03"
+action_id=&"attack_light"
+combo_step=3
+startup_ticks=4
+active_ticks=3
+recovery_ticks=7
+damage=4.0
+base_knockback=120.0
+knockback_growth=1.6
+visual_state_id=&"attack_light_combo_03"
+[sub_resource type="Resource" id="L4"]
+script=ExtResource("3_attack")
+attack_id=&"myo-ryung-light-04"
+action_id=&"attack_light"
+combo_step=4
+startup_ticks=6
+active_ticks=3
+recovery_ticks=12
+damage=7.0
+base_knockback=210.0
+knockback_growth=2.4
+is_finisher=true
+visual_state_id=&"attack_light_combo_04"
+[sub_resource type="Resource" id="LU"]
+script=ExtResource("3_attack")
+attack_id=&"myo-ryung-light-up"
+action_id=&"attack_light"
+input_direction=3
+startup_ticks=5
+active_ticks=3
+recovery_ticks=9
+damage=5.0
+base_knockback=150.0
+knockback_growth=1.8
+launch_vector=Vector2(0.25,-1)
+visual_state_id=&"attack_light_up"
+[sub_resource type="Resource" id="LD"]
+script=ExtResource("3_attack")
+attack_id=&"myo-ryung-light-down"
+action_id=&"attack_light"
+input_direction=4
+startup_ticks=5
+active_ticks=3
+recovery_ticks=9
+damage=5.0
+base_knockback=150.0
+knockback_growth=1.8
+launch_vector=Vector2(0.4,0.65)
+visual_state_id=&"attack_light_down"
+[sub_resource type="Resource" id="HS"]
+script=ExtResource("3_attack")
+attack_id=&"myo-ryung-heavy-side"
+action_id=&"attack_heavy"
+input_direction=5
+startup_ticks=10
+active_ticks=4
+recovery_ticks=16
+damage=10.0
+base_knockback=260.0
+knockback_growth=3.0
+is_finisher=true
+visual_state_id=&"attack_heavy_side"
+[sub_resource type="Resource" id="HU"]
+script=ExtResource("3_attack")
+attack_id=&"myo-ryung-heavy-up"
+action_id=&"attack_heavy"
+input_direction=3
+startup_ticks=10
+active_ticks=4
+recovery_ticks=16
+damage=10.0
+base_knockback=260.0
+knockback_growth=3.0
+launch_vector=Vector2(0.25,-1)
+is_finisher=true
+is_launcher=true
+visual_state_id=&"attack_heavy_up"
+[sub_resource type="Resource" id="HD"]
+script=ExtResource("3_attack")
+attack_id=&"myo-ryung-heavy-down"
+action_id=&"attack_heavy"
+input_direction=4
+startup_ticks=10
+active_ticks=4
+recovery_ticks=16
+damage=10.0
+base_knockback=260.0
+knockback_growth=3.0
+launch_vector=Vector2(0.4,0.65)
+is_finisher=true
+visual_state_id=&"attack_heavy_down"
+[sub_resource type="Resource" id="DL"]
+script=ExtResource("3_attack")
+attack_id=&"myo-ryung-dash-light"
+action_id=&"attack_light"
+input_direction=5
+requires_dash=true
+startup_ticks=5
+active_ticks=3
+recovery_ticks=9
+damage=6.0
+base_knockback=170.0
+knockback_growth=2.0
+visual_state_id=&"attack_dash_light"
+[sub_resource type="Resource" id="DH"]
+script=ExtResource("3_attack")
+attack_id=&"myo-ryung-dash-heavy"
+action_id=&"attack_heavy"
+input_direction=5
+requires_dash=true
+startup_ticks=8
+active_ticks=4
+recovery_ticks=14
+damage=10.0
+base_knockback=240.0
+knockback_growth=2.8
+is_finisher=true
+visual_state_id=&"attack_dash_heavy"
+[sub_resource type="Resource" id="AL"]
+script=ExtResource("3_attack")
+attack_id=&"myo-ryung-air-light"
+action_id=&"attack_light"
+input_direction=6
+activation_context=1
+startup_ticks=5
+active_ticks=3
+recovery_ticks=9
+damage=5.0
+base_knockback=150.0
+knockback_growth=1.8
+visual_state_id=&"attack_air_light"
+[sub_resource type="Resource" id="AH"]
+script=ExtResource("3_attack")
+attack_id=&"myo-ryung-air-heavy"
+action_id=&"attack_heavy"
+input_direction=6
+activation_context=1
+startup_ticks=8
+active_ticks=4
+recovery_ticks=14
+damage=9.0
+base_knockback=230.0
+knockback_growth=2.7
+is_finisher=true
+visual_state_id=&"attack_air_heavy"
+[sub_resource type="Resource" id="SN"]
+script=ExtResource("3_attack")
+attack_id=&"myo-ryung-special-neutral"
+action_id=&"attack_special"
+activation_context=2
+startup_ticks=8
+active_ticks=8
+recovery_ticks=16
+damage=3.0
+base_knockback=90.0
+knockback_growth=1.0
+max_hits_per_target=3
+rehit_interval_ticks=3
+visual_state_id=&"special_neutral"
+[sub_resource type="Resource" id="SU"]
+script=ExtResource("3_attack")
+attack_id=&"myo-ryung-special-up"
+action_id=&"attack_special"
+input_direction=3
+activation_context=2
+startup_ticks=6
+active_ticks=5
+recovery_ticks=18
+damage=7.0
+base_knockback=190.0
+knockback_growth=2.3
+launch_vector=Vector2(0.2,-1)
+self_impulse=Vector2(0,-440)
+visual_state_id=&"special_up"
 
 [node name="MyoRyungFighter" type="CharacterBody2D"]
-collision_layer = 2
-collision_mask = 1
-script = ExtResource("1_controller")
-fighter_id = &"myo-ryung"
-character_data = ExtResource("2_character")
-combo_count = 4
-neutral_special_multi_hit = true
-
+collision_layer=2
+collision_mask=1
+script=ExtResource("1_controller")
+fighter_id=&"myo-ryung"
+character_data=ExtResource("2_character")
+attacks=Array[ExtResource("3_attack")]([SubResource("L1"),SubResource("L2"),SubResource("L3"),SubResource("L4"),SubResource("LU"),SubResource("LD"),SubResource("HS"),SubResource("HU"),SubResource("HD"),SubResource("DL"),SubResource("DH"),SubResource("AL"),SubResource("AH"),SubResource("SN"),SubResource("SU")])
+combo_count=4
+body_color=Color(0.94,0.53,0.32,1)
 [node name="Body" type="CollisionShape2D" parent="."]
-position = Vector2(0, -34)
-shape = SubResource("1_shape")
+position=Vector2(0,-34)
+shape=SubResource("BodyShape")
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer=4
+collision_mask=0
+monitoring=false
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position=Vector2(0,-34)
+shape=SubResource("BodyShape")
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer=8
+collision_mask=4
+monitoring=false
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape=SubResource("HitShape")
+disabled=true

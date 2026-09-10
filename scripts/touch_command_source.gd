@@ -7,11 +7,10 @@ var _action_touch_counts: Dictionary[StringName, int] = {}
 
 
 func _ready() -> void:
-	set_process_unhandled_input(true)
 	queue_redraw()
 
 
-func _unhandled_input(event: InputEvent) -> void:
+func handle_pointer_event(event: InputEvent) -> void:
 	if event is InputEventScreenTouch:
 		var touch := event as InputEventScreenTouch
 		if touch.pressed: _assign(touch.index, touch.position)
@@ -22,6 +21,19 @@ func _unhandled_input(event: InputEvent) -> void:
 		if _touch_actions.get(drag.index, &"") != next:
 			_release(drag.index)
 			if not next.is_empty(): _press(drag.index, next)
+	elif event is InputEventMouseButton:
+		if OS.has_feature("mobile"): return
+		var button := event as InputEventMouseButton
+		if button.button_index == MOUSE_BUTTON_LEFT:
+			if button.pressed: _assign(-100, button.position)
+			else: _release(-100)
+	elif event is InputEventMouseMotion and (event as InputEventMouseMotion).button_mask & MOUSE_BUTTON_MASK_LEFT:
+		if OS.has_feature("mobile"): return
+		var motion := event as InputEventMouseMotion
+		var next := _action_for(motion.position)
+		if _touch_actions.get(-100, &"") != next:
+			_release(-100)
+			if not next.is_empty(): _press(-100, next)
 
 
 func release_all_touches() -> void:
@@ -38,6 +50,7 @@ func _press(index: int, action: StringName) -> void:
 	var count: int = _action_touch_counts.get(action, 0) + 1
 	_action_touch_counts[action] = count
 	if count == 1: Input.action_press(action)
+	print("FOREST_ARENA_TOUCH action=%s edge=press pointer=%d" % [action, index])
 
 
 func _release(index: int) -> void:
@@ -47,6 +60,7 @@ func _release(index: int) -> void:
 	var count := maxi(_action_touch_counts.get(action, 1) - 1, 0)
 	_action_touch_counts[action] = count
 	if count == 0: Input.action_release(action)
+	print("FOREST_ARENA_TOUCH action=%s edge=release pointer=%d" % [action, index])
 
 
 func _action_for(position: Vector2) -> StringName:
