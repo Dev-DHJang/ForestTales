@@ -1,0 +1,2 @@
+# Design-contract sources in this directory are read directly by validation scripts.
+# Do not import the CSV as a Godot localization table.

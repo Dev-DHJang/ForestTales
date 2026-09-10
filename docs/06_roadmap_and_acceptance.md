@@ -4,25 +4,27 @@
 
 ## Phase 0 — 실행 기반
 
-Godot 프로젝트, 폴더, Android export, 의미 InputMap, 2D 테스트 경기장과 도형 기반 임시 파이터를 만든다.
+Godot 프로젝트, 폴더, Android export, 의미 InputMap, 2D 테스트 경기장과 도형 기반 임시 파이터를 만든다. 전체 공격 체계 v01은 문서·계약 검사만 완료했으며 런타임 전투는 아직 만들지 않았다.
+
+Forest Arena 브랜드, 비전투 화면·에셋 ID와 Penpot 작업 계약은 Phase 0의 설계 기반으로 유지할 수 있다. 이는 24개 화면 구현, 이미지 생성, 계정·상점·랭크·온라인 기능 또는 Phase 승격을 뜻하지 않는다.
 
 종료 기준: 데스크톱 부트와 Android debug export가 실제 명령으로 재현되고, 터치·중단·복귀의 검증 계획 및 측정할 성능 ADR이 있다.
 
 ## Phase 1 — 코어 전투
 
-결정론적 X/Y 이동, 점프, 대시, 공격 단계, Hitbox/Hurtbox, 넉백, 링아웃과 최소 터치 전투를 만든다.
+결정론적 X/Y 이동, 점프, 대시, 공격 단계, Hitbox/Hurtbox, 넉백, 링아웃과 최소 터치 전투를 만든다. 우선 지상 기본 연계·방향 강공격·대시 공격·공중 약/강·대표 특수기와 복귀를 구현한다.
 
 종료 기준: 빗나감, 단일 적중, 동시 타격, 자가 타격 방지, 반복 적중 방지, 링아웃과 입력 해제 회귀가 통과한다.
 
 ## Phase 2 — 데이터와 로드아웃
 
-Resource 계약과 CharacterData + JobData + AccessoryData 조합을 만든다.
+Resource 계약과 CharacterData + JobData + AccessoryData 조합을 만든다. MoveSetData는 기술 목록·분기·입력 조건·시각 상태 참조를, AttackData는 타이밍·판정을 소유하도록 versioned 계약을 확정한다.
 
 종료 기준: 조합 순서, 잘못된 ID, 충돌과 소스 Resource 비변경성이 자동 검사된다.
 
 ## Phase 3 — 전투 원형 비교
 
-서로 다른 전투 성향의 소수 캐릭터·직업 원형을 플레이테스트한다.
+서로 다른 전투 성향의 소수 캐릭터·직업 원형을 플레이테스트한다. 방어·회피·잡기·차지·궁극기와 전체 특수기 비교는 ADR 승인 뒤 이 Phase부터 검증한다.
 
 종료 기준: 각 원형의 가설, 공통 조건, 결과와 유지·폐기 근거가 기록된다.
 
@@ -40,7 +42,7 @@ Resource 계약과 CharacterData + JobData + AccessoryData 조합을 만든다.
 
 ## Phase 6 — 오프라인 수직 슬라이스
 
-Android 연습·AI 대전, 결과 흐름, 2D 표현, 오디오, 접근성과 모바일 안정성을 통합한다.
+Android Story·AI·Practice와 Solo/Team의 오프라인 검증 범위, 결과 흐름, 2D 표현, 오디오, 접근성과 모바일 안정성을 통합한다. 전체 최대 8명과 Team 팀당 1~4명 규칙을 만족하되 온라인 기능을 암시하지 않는다.
 
 종료 기준: 승인된 콘텐츠와 전체 사용자 흐름이 Android에서 검증되고 알려진 차단 결함이 없다.
 

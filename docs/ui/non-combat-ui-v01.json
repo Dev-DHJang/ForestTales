@@ -1,0 +1,251 @@
+{
+  "schema_version": 1,
+  "status": "accepted-design-contract",
+  "product": {
+    "display_name": "Forest Arena",
+    "logo_text": "FOREST ARENA",
+    "slug": "forest-arena"
+  },
+  "scope": {
+    "current_phase": 0,
+    "deliverable": "non-combat-ui-design-foundation",
+    "in_game_combat_hud_included": false,
+    "deferred": [
+      "godot-screen-implementation",
+      "image-generation",
+      "penpot-file-editing",
+      "account-shop-rank-social-backends",
+      "online-match-implementation"
+    ]
+  },
+  "resolution": {
+    "penpot_reference": [1920, 1080],
+    "runtime_logical": [1280, 720],
+    "orientation": "landscape"
+  },
+  "rules": {
+    "modes": ["Story", "Solo", "Team", "AI", "Practice"],
+    "participants": {
+      "max_total": 8,
+      "team": {
+        "min_per_team": 1,
+        "max_per_team": 4,
+        "max_total": 8
+      }
+    },
+    "accessories": {
+      "rarity_or_grade": false,
+      "forbidden_cues": ["rarity-stars", "rarity-tiers", "rarity-color-frames", "legendary-epic-labels", "loot-grades"]
+    },
+    "splash": {
+      "characters_allowed": false
+    },
+    "missing_assets": {
+      "placeholder_name": "exact-IMG-slot",
+      "visible_register": "MISSING ASSETS",
+      "silent_final_image_substitution": false
+    }
+  },
+  "art_direction": {
+    "style": "original bright painterly fantasy forest",
+    "pixel_art": false,
+    "palette": ["sky-blue", "mint", "fresh-green", "cobalt-blue", "warm-gold"],
+    "materials": ["translucent-glass", "carved-wood", "light-stone"],
+    "character_direction": "approved three-head-proportion character concepts remain authoritative",
+    "third_party_copying": false
+  },
+  "screens": [
+    {
+      "id": "SCR_01_Splash",
+      "group": "Launch",
+      "title": "Splash",
+      "runtime_gate": "future-ui-implementation",
+      "requirements": ["character-free forest", "logo", "loading progress"],
+      "asset_slots": ["IMG/bg/splash", "IMG/logo/main"]
+    },
+    {
+      "id": "SCR_02_Login",
+      "group": "Launch",
+      "title": "Login",
+      "runtime_gate": "account-approval-required",
+      "requirements": ["forest village", "start action", "secondary login actions"],
+      "asset_slots": ["IMG/bg/login", "IMG/logo/main"]
+    },
+    {
+      "id": "SCR_03_Lobby",
+      "group": "Lobby/meta",
+      "title": "Lobby",
+      "runtime_gate": "phase-6-or-later",
+      "requirements": ["play is dominant", "preset summary", "mission and event cards"],
+      "asset_slots": ["IMG/bg/lobby", "IMG/char/mouse/full", "IMG/illust/event-01"]
+    },
+    {
+      "id": "SCR_04_CharacterCollection",
+      "group": "Lobby/meta",
+      "title": "Character Collection",
+      "runtime_gate": "character-approval-required",
+      "requirements": ["role filters", "approved roster identities", "selected preview"],
+      "asset_slots": ["IMG/bg/character-room", "IMG/char/mouse/face", "IMG/char/rabbit/face", "IMG/char/roster/*"]
+    },
+    {
+      "id": "SCR_05_CharacterDetail",
+      "group": "Lobby/meta",
+      "title": "Character Detail",
+      "runtime_gate": "phase-6-or-later",
+      "requirements": ["large character art", "role and gameplay traits", "skills combo story tabs"],
+      "asset_slots": ["IMG/bg/character-room", "IMG/char/mouse/full"]
+    },
+    {
+      "id": "SCR_06_AccessoryCollection",
+      "group": "Lobby/meta",
+      "title": "Accessory Collection",
+      "runtime_gate": "phase-4-or-later",
+      "requirements": ["functional filters", "equipped state", "no rarity cues"],
+      "asset_slots": ["IMG/bg/accessory-workshop", "IMG/accessory/*"]
+    },
+    {
+      "id": "SCR_07_AccessoryDetail",
+      "group": "Lobby/meta",
+      "title": "Accessory Detail",
+      "runtime_gate": "phase-4-or-later",
+      "requirements": ["functional tags", "synergy is not rarity", "practice and equip actions"],
+      "asset_slots": ["IMG/bg/accessory-workshop", "IMG/accessory/*"]
+    },
+    {
+      "id": "SCR_08_Preset",
+      "group": "Lobby/meta",
+      "title": "Preset",
+      "runtime_gate": "phase-6-or-later",
+      "requirements": ["three or four presets", "character and accessory composition", "fast switching"],
+      "asset_slots": ["IMG/char/mouse/face", "IMG/accessory/*"]
+    },
+    {
+      "id": "SCR_09_ModeSelect",
+      "group": "Match flow",
+      "title": "Mode Select",
+      "runtime_gate": "phase-6-offline-phase-7-online",
+      "requirements": ["five approved modes", "Solo max 8", "Team 1-4 per team and max 8"],
+      "asset_slots": ["IMG/bg/mode/story", "IMG/bg/mode/solo", "IMG/bg/mode/team", "IMG/bg/mode/ai", "IMG/bg/mode/practice"]
+    },
+    {
+      "id": "SCR_10_PartyLobby",
+      "group": "Match flow",
+      "title": "Party Lobby",
+      "runtime_gate": "phase-7-online",
+      "requirements": ["up to eight slots", "four slots per team", "host and ready state"],
+      "asset_slots": ["IMG/char/roster/*"]
+    },
+    {
+      "id": "SCR_11_Matchmaking",
+      "group": "Match flow",
+      "title": "Matchmaking",
+      "runtime_gate": "phase-7-online",
+      "requirements": ["selected mode and preset", "elapsed timer", "cancel action"],
+      "asset_slots": ["IMG/bg/matchmaking"]
+    },
+    {
+      "id": "SCR_12_MatchFound",
+      "group": "Match flow",
+      "title": "Match Found",
+      "runtime_gate": "phase-7-online",
+      "requirements": ["countdown ring", "accept decline", "acceptance progress"],
+      "asset_slots": ["IMG/fx/match-ring"]
+    },
+    {
+      "id": "SCR_13_CharacterSelect",
+      "group": "Match flow",
+      "title": "Character Select",
+      "runtime_gate": "phase-6-offline-phase-7-online",
+      "requirements": ["countdown", "eight participant legibility", "selected fighter preview"],
+      "asset_slots": ["IMG/char/mouse/full", "IMG/char/rabbit/full", "IMG/char/roster/*"]
+    },
+    {
+      "id": "SCR_14_AccessorySelect",
+      "group": "Match flow",
+      "title": "Accessory Select",
+      "runtime_gate": "phase-6-or-later",
+      "requirements": ["selected character remains visible", "functional filters", "no rarity cues"],
+      "asset_slots": ["IMG/char/mouse/bust", "IMG/accessory/*"]
+    },
+    {
+      "id": "SCR_15_Loading",
+      "group": "Match flow",
+      "title": "Loading",
+      "runtime_gate": "phase-6-or-later",
+      "requirements": ["pre-battle only", "player cards", "tip and progress"],
+      "asset_slots": ["IMG/bg/loading", "IMG/char/mouse/full", "IMG/char/rabbit/full", "IMG/logo/small"]
+    },
+    {
+      "id": "SCR_16_Victory",
+      "group": "Result",
+      "title": "Victory",
+      "runtime_gate": "phase-6-or-later",
+      "requirements": ["immediate victory message", "celebratory forest", "continue action"],
+      "asset_slots": ["IMG/bg/victory", "IMG/illust/victory-duo", "IMG/fx/victory-rays"]
+    },
+    {
+      "id": "SCR_17_ResultSummary",
+      "group": "Result",
+      "title": "Result Summary",
+      "runtime_gate": "phase-6-results-rank-approval-required",
+      "requirements": ["simple first layer", "reward summary", "rank change only when applicable"],
+      "asset_slots": ["IMG/rank/*"]
+    },
+    {
+      "id": "SCR_18_MVP",
+      "group": "Result",
+      "title": "MVP",
+      "runtime_gate": "phase-6-or-later",
+      "requirements": ["MVP hero", "fight stats", "like and loadout inspection"],
+      "asset_slots": ["IMG/illust/mvp-mouse"]
+    },
+    {
+      "id": "SCR_19_Shop",
+      "group": "Lobby/meta",
+      "title": "Shop",
+      "runtime_gate": "economy-approval-required",
+      "requirements": ["practice before obtain", "play remains primary elsewhere", "no rarity cues"],
+      "asset_slots": ["IMG/illust/shop-feature", "IMG/accessory/*"]
+    },
+    {
+      "id": "SCR_20_Collection",
+      "group": "Lobby/meta",
+      "title": "Collection",
+      "runtime_gate": "persistence-approval-required",
+      "requirements": ["owned and unowned state", "collection progress", "no accessory rarity"],
+      "asset_slots": ["IMG/char/roster/*", "IMG/accessory/*"]
+    },
+    {
+      "id": "SCR_21_Mission",
+      "group": "Lobby/meta",
+      "title": "Mission",
+      "runtime_gate": "progression-approval-required",
+      "requirements": ["daily weekly achievement grouping", "progress", "non-coercive character goals"],
+      "asset_slots": ["IMG/icon/mission"]
+    },
+    {
+      "id": "SCR_22_Social",
+      "group": "Lobby/meta",
+      "title": "Social",
+      "runtime_gate": "social-and-phase-7-approval-required",
+      "requirements": ["friends and recent players", "presence", "invite spectate add"],
+      "asset_slots": ["IMG/icon/social"]
+    },
+    {
+      "id": "SCR_23_Rank",
+      "group": "Lobby/meta",
+      "title": "Rank",
+      "runtime_gate": "rank-and-phase-7-approval-required",
+      "requirements": ["season context", "rank progress", "ranked start only when approved"],
+      "asset_slots": ["IMG/rank/*"]
+    },
+    {
+      "id": "SCR_24_Profile",
+      "group": "Lobby/meta",
+      "title": "Profile",
+      "runtime_gate": "account-approval-required",
+      "requirements": ["representative fighter", "player summary", "favorite loadout"],
+      "asset_slots": ["IMG/char/mouse/full", "IMG/rank/*"]
+    }
+  ]
+}

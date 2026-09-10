@@ -1,0 +1,42 @@
+---
+name: forest-arena-character-design
+description: Design original Forest Arena playable-animal character concepts, collect the complete prompt brief, review them, and register only user-approved assets.
+---
+
+# Forest Arena 캐릭터 디자인
+
+## 사용 시점
+
+- 플레이어 또는 전투 캐릭터의 동물 모티브, 외형, 성격과 전투 실루엣을 새로 설계할 때 사용한다.
+- 초상화·아이콘·배경만 만들거나 승인된 콘셉트를 프레임 애니메이션으로 바꾸는 작업에는 사용하지 않는다.
+
+## 필수 입력
+
+- 캐릭터 생성 요청을 받으면 [콘셉트 프롬프트·입력 양식](references/concept-prompt-template.md)의 `사용자 입력 양식` 전체를 **한 번에** 표로 제시한다. 표시 이름과 `character_id`는 이 단계에서 묻지 않는다.
+- 사용자가 제공한 각 값을 축약하거나 다른 의미로 바꾸지 않고, 같은 필드의 브리프와 생성 프롬프트에 반영한다. 비어 있거나 뜻이 불명확한 필드가 있으면 그 필드만 재질문하며, 모든 필수 필드가 채워지기 전에는 시안을 생성하지 않는다.
+- 현재 Phase와 `assets/character/manifest.json`의 최신 권리 기록은 저장소에서 읽어 자동으로 브리프에 넣는다. 사용자가 새 참고 자료를 제공하면 그 자료의 사용 허가·출처도 기록한다.
+
+`공격 실루엣`은 준비와 발동 포즈에서 화면의 외곽 윤곽으로 읽히는 공격 신호다. 예를 들어 크게 펼친 발톱 장갑, 위로 세운 꼬리, 넓게 휘두르는 소매가 될 수 있다. 무기명이나 세부 동작을 요구하는 항목이 아니라, 최대 줌아웃에서도 공격을 알아보게 할 형태를 정하는 항목이다.
+
+## 프로젝트 작화 참조
+
+- 기본 작화 참조는 `assets/character/ja-hyun/concept/ja-hyun-concept-v01.png`와 `assets/character/myo-ryung/concept/myo-ryung-concept-v01.png`이다. 각 파일의 manifest 권리 상태와, 비율·반입체 렌더링·라인·눈 표현·의상 디테일 밀도·작은 화면 가독성이라는 참고 역할을 브리프에 기록한다.
+- 참조에서는 프로젝트의 공통 시각 언어만 추출한다. 참조 캐릭터의 종, 얼굴, 머리, 의상, 상징, 소품, 색 조합, 포즈를 복제하지 않고 새 캐릭터의 동물 모티브·역할·공격 신호를 독립적으로 설계한다.
+- 기본 참조가 없거나 읽을 수 없거나 권리 기록상 사용할 수 없으면 그 사실을 사용자에게 알리고, 사용자 지정 자료 또는 텍스트 작화 규칙만으로 진행한다.
+- 기본 목표는 3등신 전신 콘셉트다. 사용자가 지정한 배경을 그대로 사용하며, 투명 배경이면 실제 alpha와 전신 잘림 여부를 검사한다. 체크무늬가 픽셀로 남은 RGB 파일은 `fix`이며, 투명 RGBA PNG가 확인될 때까지 최종 자산으로 등록하지 않는다.
+
+## 작업 흐름
+
+1. 전체 사용자 입력 양식을 제시하고 누락·모호한 값만 재질문한다. 입력과 자동 수집 메타데이터로 충돌 없는 `_workspace/character-design-draft-<slug>/` 작업 경로와 브리프를 만든다.
+2. [콘셉트 프롬프트·입력 양식](references/concept-prompt-template.md)의 고정 작화·디자인 요구·제외 조건에 사용자 입력을 필드별로 채워, 종별 실루엣·성격·의상·공격 준비가 최대 줌아웃에서 구분되는 시안 프롬프트를 만든다.
+3. 이미지 시안이 필요한 기본 흐름에서는 imagegen으로 전신 3등신 액션 포즈를 만든다. 특정 작품, 작가, 상표, 로고 또는 참고 캐릭터의 고유 장식은 복제하지 않는다.
+4. forest-arena-qa가 입력 충족, 권리·원본성, 종·역할·공격 준비 식별성과 배경 대비를 pass, fix 또는 redo로 검토하게 한다.
+5. 시안과 QA 결과를 사용자에게 제시한다. 사용자의 명시적 승인 전에는 `assets/character/` 또는 그 manifest에 쓰지 않는다.
+6. 사용자가 시안을 승인하면 표시 이름과 소문자 kebab-case `character_id`를 묻는다. 사용자에게 ID와 등록 대상 파일을 다시 확인받은 뒤에만 PNG·디자인 시트와 `assets/character/manifest.json`을 등록한다.
+7. 승인 전 시안과 결정 근거는 draft 작업 경로에만 남긴다. 이후 프레임·아틀라스는 forest-arena-2d-animation, 전투 데이터는 forest-arena-contracts와 forest-arena-combat에 넘긴다.
+
+## 산출물과 검증
+
+- 승인 전: 입력 브리프, 생성 프롬프트, 이미지 시안과 `_workspace/character-design-draft-<slug>/03_qa_rNN.md`.
+- 승인 후: `assets/character/<character-id>/concept/`의 콘셉트 PNG·디자인 시트와 갱신된 `assets/character/manifest.json`.
+- 콘셉트 이미지는 표현 전용이며 판정, 충돌, 전투 타이밍 또는 승패의 권위가 아니다.

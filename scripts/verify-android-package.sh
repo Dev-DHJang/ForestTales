@@ -1,7 +1,7 @@
 #!/bin/sh
 set -eu
 
-apk_path=${1:-build/android/ForestTales-debug.apk}
+apk_path=${1:-build/android/ForestArena-debug.apk}
 android_sdk_path=${ANDROID_SDK_ROOT:-${ANDROID_HOME:-}}
 
 if [ -z "$android_sdk_path" ]; then
@@ -30,10 +30,10 @@ require_badging() {
 	fi
 }
 
-require_badging "package: name='com.foresttales.welllbeing'" "package ID"
+require_badging "package: name='com.forestarena.welllbeing'" "package ID"
 require_badging "sdkVersion:'29'" "minimum Android 10 / API 29"
 require_badging "targetSdkVersion:'36'" "target API 36"
-require_badging "application-label:'ForestTales'" "application label"
+require_badging "application-label:'Forest Arena'" "application label"
 require_badging "uses-feature: name='android.hardware.screen.landscape'" "landscape feature"
 require_badging "native-code: 'arm64-v8a' 'x86_64'" "arm64 device and x86_64 emulator ABIs"
 
