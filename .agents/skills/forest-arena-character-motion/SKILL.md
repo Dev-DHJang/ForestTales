@@ -14,13 +14,14 @@ description: Create reviewable, approval-gated Forest Arena idle, jump, and run 
 ## 필수 입력
 
 - 소문자 kebab-case 캐릭터 ID와 `assets/character/manifest.json`에 기록된 승인 콘셉트 PNG.
+- 승인 캐릭터의 `docs/character-appearance-v01.json` 항목과 필수·각도 한정·금지 외형 규칙.
 - 기준 방향, 각 모션의 연기·느낌, idle·run 루프 의도와 jump의 체공 의도.
 - 현재 Phase, docs/05_content_art_audio.md, 원본성·권리 조건과 소비자.
 - 위 다섯 항목 중 하나라도 없으면 생성 전에 필요한 항목만 사용자에게 물어본다. 등록되지 않았거나 콘셉트 PNG가 없는 캐릭터는 런타임 모션을 만들지 않는다.
 
 ## 작업 흐름
 
-1. manifest와 승인 콘셉트 PNG를 확인하고, `_workspace/character-motion-<character-id>/00_request.md`에 브리프·Phase·기준 방향을 기록한다.
+1. manifest, 승인 콘셉트 PNG와 외형 계약을 확인하고, `_workspace/character-motion-<character-id>/00_request.md`에 브리프·Phase·기준 방향과 외형 불변 조건을 기록한다.
 2. 독창적인 투명 배경 시안을 만들고 모션마다 정확히 16프레임을 설계한다. idle은 8 FPS 루프, run은 12 FPS 루프, jump는 1회 재생을 기본값으로 하며, 변경은 브리프와 사용자 승인에 기록한다.
 3. 승인 전 시안, 프레임 순서와 검토 산출물은 `_workspace/character-motion-<character-id>/`에만 둔다. 최종 캐릭터 에셋 경로나 manifest에는 쓰지 않는다.
 4. forest-arena-qa와 함께 16프레임 수, 프레임 누락·잘림, alpha, 기준 방향, 작은 Android 화면 실루엣, FPS·루프, 원본성·권리를 검토하고 `03_qa_rNN.md`에 기록한다.

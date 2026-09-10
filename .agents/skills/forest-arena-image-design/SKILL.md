@@ -15,12 +15,13 @@ description: Create original Forest Arena concepts, portraits, icons, UI images,
 
 - 현재 Phase, docs/05_content_art_audio.md, 용도·크기·카메라와 아트 방향.
 - 캐릭터·직업·장신구 ID, 원본성·라이선스 조건과 소비자.
+- 승인 캐릭터를 표현하면 `docs/character-appearance-v01.json`의 해당 외형 항목.
 - 비전투 UI 이미지면 assets/ui/asset-requirements.csv의 정확한 슬롯·출력 경로·상태·승인 의존성.
 
 ## 작업 흐름
 
 1. 플레이스홀더와 수직 슬라이스 품질을 구분한다.
-2. 최대 줌아웃의 종별 실루엣, 공격 포즈와 배경 대비를 우선한다.
+2. 승인 캐릭터는 외형 계약의 필수·각도 한정·금지 요소를 지키면서 최대 줌아웃의 종별 실루엣, 공격 포즈와 배경 대비를 우선한다.
 3. 제3자 IP, 상표와 특정 작가 스타일을 복제하지 않는다.
 4. 원본·후편집·출처와 런타임 crop·alpha·색상 규칙을 기록한다.
 5. UI 배치는 templates/ui-image-batch-prompt.md를 사용하되 `character-approval-required` 행은 생성하지 않는다.

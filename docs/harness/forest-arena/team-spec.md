@@ -36,6 +36,7 @@
 | Penpot 비전투 UI 설계 | product, contracts, ui, image-design, mobile, qa | orchestrator | product/contracts → ui/image-design → mobile/qa; 현재 Phase 0은 설계 기반만 |
 | Resource·ID·저장 | contracts, qa | combat, product | 01_contract.md 선행 |
 | 신규 전투 캐릭터 콘셉트 | character-design, qa | image-design, 2d-animation | 사용자 승인 전 assets/character/ 등록 금지 |
+| 승인 캐릭터 외형 경계 | character-design, contracts, qa | orchestrator | 외형 JSON이 단일 원본이며 PNG·모션 변경은 별도 승인 필요 |
 | 캐릭터 idle·jump·run 모션 | character-motion, qa | character-design, 2d-animation | 승인 콘셉트와 모션별 사용자 승인 필수 |
 | 콘셉트·정적 이미지 | image-design, qa | ui, 2d-animation | 원본성과 권리 기록 |
 | 프레임 애니메이션 | 2d-animation, qa | combat, image-design | AttackData 타이밍 소비 |
@@ -81,6 +82,7 @@ fix는 구현 생산자에게, redo는 product 또는 contracts 소유자에게 
 - combat는 전투 판정을, ui·2d-animation·image-design·audio는 표현을 소유한다.
 - 애니메이션 프레임, 프레임 이벤트, 보이는 몸·무기, UI와 소리는 피해, 상태, 넉백 또는 승패를 결정하지 않는다.
 - character-design은 최초 캐릭터 콘셉트와 승인 자산을 소유한다. image-design은 승인된 캐릭터의 초상화·아이콘과 그 밖의 정적 이미지를 소유하며, 2d-animation은 승인 콘셉트를 프레임·아틀라스로 전환한다.
+- 승인 로스터의 외형 경계는 `docs/character-appearance-v01.json`이 소유하며 character-design, character-motion, image-design, 2d-animation은 같은 캐릭터·콘셉트 ID와 필수·각도 한정·금지 규칙을 소비한다.
 - character-design은 사용자 명시 승인 후에만 `assets/character/<character-id>/concept/`과 `assets/character/manifest.json`을 갱신한다. CharacterData 등 전투 데이터화는 contracts와 combat의 별도 범위다.
 - character-motion은 manifest에 등록된 승인 콘셉트의 idle·jump·run 런타임 패키지를 소유한다. 모션별 사용자 명시 승인 전에는 `assets/character/<character-id>/animation/runtime/` 또는 manifest에 쓰지 않는다.
 - CharacterData + JobData + AccessoryData의 조합은 contracts와 combat가 함께 관리한다.

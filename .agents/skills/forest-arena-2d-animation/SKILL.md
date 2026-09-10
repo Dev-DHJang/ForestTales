@@ -14,12 +14,13 @@ description: Produce Forest Arena frame animation, sprite sheets, atlases, Sprit
 ## 필수 입력
 
 - 현재 Phase, docs/05_content_art_audio.md, 턴어라운드·키 포즈와 전투 의미 상태.
+- 승인 캐릭터 프레임이면 `docs/character-appearance-v01.json`의 해당 외형 항목.
 - 파일·메모리 예산 후보, 에셋 권리 상태와 소비 경로.
 
 ## 작업 흐름
 
 1. 원본 프레임, 런타임 아틀라스와 Godot 래퍼를 분리한다.
-2. 프레임 순서, pivot, 방향 전환, 루프와 투명 영역을 검증한다.
+2. 프레임 순서, pivot, 방향 전환, 루프, 투명 영역과 외형 계약의 필수·각도 한정·금지 요소를 검증한다.
 3. 애니메이션은 AttackData 타이밍을 표현하며 판정을 결정하지 않는다.
 4. 공급자별 경로를 공용 전투 코드에 노출하지 않는다.
 5. 최대 줌아웃 실루엣과 Android 메모리·draw call 영향을 측정한다.

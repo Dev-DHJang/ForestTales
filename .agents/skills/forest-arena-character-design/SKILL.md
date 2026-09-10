@@ -13,6 +13,7 @@ description: Design original Forest Arena playable-animal character concepts, co
 ## 필수 입력
 
 - 캐릭터 생성 요청을 받으면 [콘셉트 프롬프트·입력 양식](references/concept-prompt-template.md)의 `사용자 입력 양식` 전체를 **한 번에** 표로 제시한다. 표시 이름과 `character_id`는 이 단계에서 묻지 않는다.
+- 성인 여부·성별 표현, 인간형/수인화 수준, 필수 종 특징, 각도 한정 특징, 금지 신체 구조와 고정·가변 의상 요소를 모두 명시적으로 받는다. 동물 모티브만으로 귀·꼬리·모피나 동물형 팔다리를 추론하지 않는다.
 - 사용자가 제공한 각 값을 축약하거나 다른 의미로 바꾸지 않고, 같은 필드의 브리프와 생성 프롬프트에 반영한다. 비어 있거나 뜻이 불명확한 필드가 있으면 그 필드만 재질문하며, 모든 필수 필드가 채워지기 전에는 시안을 생성하지 않는다.
 - 현재 Phase와 `assets/character/manifest.json`의 최신 권리 기록은 저장소에서 읽어 자동으로 브리프에 넣는다. 사용자가 새 참고 자료를 제공하면 그 자료의 사용 허가·출처도 기록한다.
 
@@ -22,6 +23,7 @@ description: Design original Forest Arena playable-animal character concepts, co
 
 - 기본 작화 참조는 `assets/character/ja-hyun/concept/ja-hyun-concept-v01.png`와 `assets/character/myo-ryung/concept/myo-ryung-concept-v01.png`이다. 각 파일의 manifest 권리 상태와, 비율·반입체 렌더링·라인·눈 표현·의상 디테일 밀도·작은 화면 가독성이라는 참고 역할을 브리프에 기록한다.
 - 참조에서는 프로젝트의 공통 시각 언어만 추출한다. 참조 캐릭터의 종, 얼굴, 머리, 의상, 상징, 소품, 색 조합, 포즈를 복제하지 않고 새 캐릭터의 동물 모티브·역할·공격 신호를 독립적으로 설계한다.
+- 기존 승인 캐릭터를 후속 표현으로 만들 때는 `docs/character-appearance-v01.json`의 필수·허용·금지 규칙을 원본으로 사용한다. 신규 캐릭터는 같은 필드를 승인 브리프에 먼저 확정한다.
 - 기본 참조가 없거나 읽을 수 없거나 권리 기록상 사용할 수 없으면 그 사실을 사용자에게 알리고, 사용자 지정 자료 또는 텍스트 작화 규칙만으로 진행한다.
 - 기본 목표는 3등신 전신 콘셉트다. 사용자가 지정한 배경을 그대로 사용하며, 투명 배경이면 실제 alpha와 전신 잘림 여부를 검사한다. 체크무늬가 픽셀로 남은 RGB 파일은 `fix`이며, 투명 RGBA PNG가 확인될 때까지 최종 자산으로 등록하지 않는다.
 
