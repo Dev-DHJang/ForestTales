@@ -1,0 +1,10 @@
+# Copy only the required section into a trusted project's Codex configuration.
+# This example contains no credentials.
+
+[mcp_servers.penpot]
+url = "http://localhost:4401/mcp"
+required = false
+
+# Remote alternative: never commit a real MCP key.
+# [mcp_servers.penpot_remote]
+# url = "https://<your-penpot-domain>/mcp/stream?userToken=YOUR_MCP_KEY"

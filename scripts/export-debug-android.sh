@@ -1,7 +1,7 @@
 #!/bin/sh
 set -eu
 
-apk_path=build/android/ForestTales-debug.apk
+apk_path=build/android/ForestArena-debug.apk
 
 if [ -f android/build/build.gradle ]; then
 	godot --headless --path . --export-debug "Android Debug" "$apk_path"

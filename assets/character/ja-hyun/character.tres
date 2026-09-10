@@ -1,0 +1,33 @@
+[gd_resource type="Resource" script_class="CharacterData" load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/character_data.gd" id="1_data"]
+[ext_resource type="Script" path="res://scripts/data/character_stats.gd" id="2_stats"]
+[ext_resource type="Texture2D" path="res://assets/character/ja-hyun/concept/ja-hyun-concept-v01.png" id="3_image"]
+
+[sub_resource type="Resource" id="CharacterStats_ja_hyun"]
+script = ExtResource("2_stats")
+survivability = 105.0
+weight = 1.05
+ground_speed = 300.0
+air_speed = 280.0
+jump_velocity = 520.0
+gravity = 1400.0
+dash_speed = 500.0
+dash_duration_seconds = 0.15
+air_jump_count = 1
+
+[resource]
+script = ExtResource("1_data")
+schema_version = 1
+character_id = &"ja-hyun"
+display_name = "자현"
+concept_asset_id = &"ja-hyun-concept-v01"
+concept_image = ExtResource("3_image")
+concept_summary = "푸른 리본과 흰 후드를 두른 쥐 모티브의 민첩한 거리 격투가. 낮은 자세와 길게 흐르는 리본으로 공격 준비를 읽힌다."
+background_setting = "숲 마을의 빠른 심부름꾼으로, 침착하게 거리를 재고 동료를 먼저 위험에서 빼낸다."
+combat_role = "균형형 근접 격투가"
+tags = Array[StringName]([&"mouse", &"striker", &"balanced"])
+move_slot_ids = Array[StringName]([&"ja-hyun-light-combo", &"ja-hyun-heavy-sweep", &"ja-hyun-ribbon-rush"])
+passive_description = "정확한 간격 유지 뒤 이어지는 근접 압박을 지향한다. 실제 효과는 향후 PassiveData에서 정의한다."
+job_tree_ids = Array[StringName]([])
+base_stats = SubResource("CharacterStats_ja_hyun")

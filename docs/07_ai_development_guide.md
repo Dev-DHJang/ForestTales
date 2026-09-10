@@ -10,6 +10,7 @@
 6. qa는 원 요청과 생산자·소비자 경계를 함께 검토한다.
 7. 미정 영구 규칙은 proposed ADR로 남기고 사용자 승인 전 accepted로 만들지 않는다.
 8. 실제 Android 기기에서 수행하지 않은 검증은 에디터 결과와 구분한다.
+9. 비전투 UI 작업은 `docs/ui/non-combat-ui-v01.json`과 `assets/ui/asset-requirements.csv`를 먼저 읽고 product/contracts → ui/image-design → mobile/qa 순서로 인수인계한다.
 
 ## 표준 요청 형식
 
@@ -32,7 +33,7 @@
 
 ## 초기 구현 금지
 
-Phase 0~1에서는 최종 아트·애니메이션, 성장·경제 UI, 계정, 상점, 결제, 광고, 온라인 매칭, 프로덕션 백엔드와 전체 에셋 다운로드를 하지 않는다. 온라인 역할은 Phase 7과 승인된 ADR·계약 전 요청을 blocked로 인수인계한다.
+Phase 0~1에서는 최종 전투 런타임 연결, 24개 비전투 화면의 실제 Godot 구현, 성장·경제 UI, 계정, 상점, 결제, 광고, 온라인 매칭, 프로덕션 백엔드와 전체 에셋 다운로드를 하지 않는다. 사용자 승인 콘셉트와 미연결 모션 패키지는 manifest·Resource 계약 검증용 선행 콘텐츠로만 등록할 수 있으며, 전투 타이밍·판정 또는 Phase 완료를 뜻하지 않는다. 온라인 역할은 Phase 7과 승인된 ADR·계약 전 요청을 blocked로 인수인계한다.
 
 ## 인수인계 확인
 

@@ -1,8 +1,8 @@
-# ForestTales 에이전트 가이드
+# Forest Arena 에이전트 가이드
 
 ## What
 
-- ForestTales는 Godot 4 기반 Android 우선 2D 플랫폼 아레나 격투게임이다.
+- Forest Arena는 Godot 4 기반 Android 우선 2D 플랫폼 아레나 격투게임이다.
 - 가로 화면과 터치가 제품 기준이며, 데스크톱 입력은 개발·검증용 어댑터다.
 - 제품 기준은 README.md의 문서 우선순위와 docs/01~07, 승인된 docs/DECISIONS.md다.
 
@@ -16,5 +16,7 @@
 - 모든 작업은 _workspace/<topic>/에 요청·생산·QA·종료 증적을 남긴다.
 - 새 기능은 자동 테스트 또는 이름 있는 수동 회귀 절차를 포함한다.
 - Android 실제 기기에서 확인하지 않은 결과를 기기 검증 통과로 기록하지 않는다.
-- 여러 영역 작업은 .agents/skills/forest-tales-orchestrator/와 docs/harness/forest-tales/team-spec.md를 따른다.
-- 현재 검증 명령은 ./scripts/verify-harness.sh뿐이다. Phase 0에서 실제 게임 검증 명령이 생기면 이 파일과 팀 명세를 함께 갱신한다.
+- 여러 영역 작업은 .agents/skills/forest-arena-orchestrator/와 docs/harness/forest-arena/team-spec.md를 따른다.
+- 기본 로컬 검증은 `./scripts/verify.sh`이며, Phase 0 smoke·캐릭터 자산 계약·승인 모션 계약·하네스 검증을 순서대로 실행한다. 하네스 전용 변경은 `./scripts/verify-harness.sh`를 함께 실행한다.
+- 역할, 요청 라우팅, 작업 증적 상태와 Android 검증 명령은 docs/harness/forest-arena/operating-index.md를 기준으로 확인한다.
+- 비전투 UI 설계는 docs/ui/non-combat-ui-v01.json과 assets/ui/asset-requirements.csv를 계약 원본으로 사용하며, Penpot 절차는 docs/ui/penpot-setup.md를 따른다.

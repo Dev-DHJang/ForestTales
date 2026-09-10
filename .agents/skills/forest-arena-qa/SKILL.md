@@ -1,0 +1,31 @@
+---
+name: forest-arena-qa
+description: Independently verify Forest Arena requirements, boundaries, gameplay, UX, contracts, assets, and release evidence.
+---
+
+# Forest Arena QA
+
+## 사용 시점
+
+- 사용자 경험, 전투, 계약, 데이터, 에셋, 플랫폼 또는 릴리스 변경의 독립 검토에 사용한다.
+- 캐릭터 콘셉트는 입력 충족, 독창성·권리, 최대 줌아웃 실루엣과 배경 대비를 forest-arena-character-design과 독립적으로 검토한다.
+- 캐릭터 모션은 16프레임, 128×128 셀·2048×128 시트, alpha, 프레임 순서·잘림, 기준 방향, FPS·루프, SpriteFrames 참조, manifest 기록과 모션별 명시 승인을 forest-arena-character-motion과 독립적으로 검토한다.
+- 단순 문구 수정은 오케스트레이터 검토만으로 충분할 수 있다.
+
+## 필수 입력
+
+- 원 요청, 00_request.md, 담당 제품 문서, 계약과 생산자 산출물.
+- 소비자 측 파일, 테스트 환경과 수용 기준.
+
+## 작업 흐름
+
+1. 기준마다 필수 또는 사용자 승인 명시적 이연을 표시한다.
+2. 생산자와 소비자를 함께 읽어 ID, 타입, 상태, 이벤트와 경계를 비교한다.
+3. 정상·경계·실패·회귀를 자동 검사 또는 재현 가능한 절차로 확인한다.
+4. 03_qa_rNN.md에 pass, fix, redo 또는 blocked를 기록한다.
+5. 수정 뒤 새 회차로 영향 범위 전체를 검증한다.
+
+## 산출물과 검증
+
+- _workspace/<topic>/03_qa_rNN.md와 구체적 증거.
+- 필수 blocked, 미실행 기기 검사와 명시적 이연을 pass로 바꾸지 않는다.

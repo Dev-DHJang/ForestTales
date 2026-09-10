@@ -14,13 +14,17 @@
 | --- | --- |
 | CharacterData | ID, 기본 능력치·기술·패시브·태그·직업 트리와 시각 참조 |
 | CharacterStats | 생존, 무게, 이동, 점프, 중력과 대시 값 |
-| AttackData | 단계, 피해, 넉백, hitbox, 전달 방식과 재타격 조건 |
-| MoveSetData | 의미 공격 슬롯과 후속 확장 슬롯 |
+| AttackData | 권위 있는 startup·active·recovery, 피해, 넉백, hitbox, 전달 방식과 재타격 조건 |
+| MoveSetData | 기술 목록, 의미 입력·방향·지상/공중 조건, 연계 분기와 시각 상태 ID 참조 |
 | JobData | 부모·단계, 능력치·기술·패시브·태그와 전투 규칙 변경 |
 | AccessoryData | 기본 변경, 기술 패치, 조건 효과와 태그 시너지 |
 | StageData | 경기장 ID, 플랫폼, 스폰, 링아웃 경계와 시각 참조 |
 
+캐릭터의 단일 저작 출처는 `assets/character/<character-id>/character.tres`의 CharacterData다. 이 Resource는 콘셉트 이미지 참조, 설정, 역할, 태그, 기술·패시브·직업 확장 슬롯과 기본 CharacterStats를 함께 소유한다. PNG와 이후의 애니메이션은 별도 자산 파일로 두되 CharacterData가 참조하며, 시각 자산은 판정·공격 타이밍·승패의 권위가 아니다.
+
 조합 순서는 CharacterData, 누적 JobData, AccessoryData이며 결과는 RuntimeCombatProfile이다. 정확한 병합 우선순위와 실패 방식은 Phase 2 계약에서 버전과 함께 확정한다.
+
+`docs/attack-system-v01.json`은 구현 전 공격 콘셉트의 검사 가능한 원본이다. Phase 2에서는 이를 그대로 런타임 Resource로 읽지 않고, versioned MoveSetData·AttackData로 분리한다. 미래 `CombatIntent`는 `action_id`, 4방향 `direction`, `press|hold|release` edge, 지상/공중 문맥을 담는다. 입력 예약, 취소 창, 피해와 hitbox는 이 콘셉트 JSON이나 VisualAdapter가 소유하지 않는다.
 
 ## 2D 런타임 경계
 
@@ -38,6 +42,7 @@
 | MovementController | X/Y 이동, 점프, 중력과 대시 |
 | FighterStateMachine | 전이, 행동 잠금과 취소 |
 | AttackController | AttackData 단계 진행과 권위 hitbox 제어 |
+| ComboController | 1개 입력 예약, 연계 분기·종료, 공중 행동 한도와 기술별 취소 조건 |
 | HitResolver | 적중 중복·자가 타격 방지와 결과 전달 |
 | CombatMath | 피해·경직·넉백 공식의 단일 위치 |
 | LoadoutBuilder | 소스 비변경 런타임 프로필 생성 |
