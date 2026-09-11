@@ -7,6 +7,9 @@ signal match_ended(winner_id: StringName)
 @export var rules: CombatRules
 @export var player: FighterController
 @export var training_dummy: FighterController
+@export var loadout_catalog: LoadoutCatalog
+@export var player_selection: LoadoutSelection
+@export var training_dummy_selection: LoadoutSelection
 
 var tick := 0
 var paused := false
@@ -20,6 +23,10 @@ var _last_player_direction: CombatIntent.Direction = CombatIntent.Direction.NEUT
 func _ready() -> void:
 	if player == null: player = get_node("../World/Player") as FighterController
 	if training_dummy == null: training_dummy = get_node("../World/TrainingDummy") as FighterController
+	if not _configure_fighters():
+		paused = true
+		push_error("Match did not start because loadout construction failed.")
+		return
 	reset_match()
 
 
@@ -54,6 +61,21 @@ func reset_match() -> void:
 	player.reset_for_match(rules)
 	training_dummy.reset_for_match(rules)
 	snapshot_changed.emit(snapshot())
+
+
+func _configure_fighters() -> bool:
+	if loadout_catalog == null or player_selection == null or training_dummy_selection == null:
+		push_error("Match requires a LoadoutCatalog and two LoadoutSelections.")
+		return false
+	var player_result := LoadoutBuilder.build(player_selection, loadout_catalog)
+	var dummy_result := LoadoutBuilder.build(training_dummy_selection, loadout_catalog)
+	if not player_result.succeeded() or not dummy_result.succeeded():
+		push_error("Loadout build failed: player=%s dummy=%s" % [player_result.error_codes, dummy_result.error_codes])
+		return false
+	if not player.configure_profile(player_result.profile) or not training_dummy.configure_profile(dummy_result.profile):
+		push_error("Loadout build produced a profile for the wrong fighter.")
+		return false
+	return true
 
 
 func pause_match(value: bool) -> void:
@@ -133,7 +155,7 @@ func _resolve_hits() -> void:
 		var attack: AttackData = hit.attack
 		var target: FighterController = hit.target
 		var damage_after := float(hit.target_damage) + attack.damage
-		var speed := (attack.base_knockback + damage_after * attack.knockback_growth) / target.character_data.base_stats.weight
+		var speed := (attack.base_knockback + damage_after * attack.knockback_growth) / target._stats().weight
 		var direction := _launch_direction(attack, hit.source_position, hit.target_position, hit.source_facing, hit.source_direction)
 		direction = direction.rotated(_di_angle(hit.target_direction))
 		var stun := clampi(roundi(speed / 20.0), rules.hitstun_min_ticks, rules.hitstun_max_ticks)

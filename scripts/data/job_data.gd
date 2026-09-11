@@ -1,0 +1,26 @@
+class_name JobData
+extends Resource
+
+@export var schema_version: int = 1
+@export var job_id: StringName
+@export var parent_job_id: StringName
+@export var stat_modifiers: Array[StatModifier] = []
+@export var move_slot_patches: Array[MoveSlotPatch] = []
+@export var added_passive_ids: Array[StringName] = []
+@export var added_tags: Array[StringName] = []
+
+
+func is_valid_definition() -> bool:
+	return schema_version == 1 and not job_id.is_empty() and _has_unique_writes()
+
+
+func _has_unique_writes() -> bool:
+	var stats: Dictionary = {}
+	for modifier: StatModifier in stat_modifiers:
+		if modifier == null or not modifier.is_valid_definition() or stats.has(modifier.field_key()): return false
+		stats[modifier.field_key()] = true
+	var slots: Dictionary = {}
+	for patch: MoveSlotPatch in move_slot_patches:
+		if patch == null or not patch.is_valid_definition() or slots.has(patch.slot_id): return false
+		slots[patch.slot_id] = true
+	return true

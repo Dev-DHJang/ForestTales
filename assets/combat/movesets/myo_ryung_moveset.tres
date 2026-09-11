@@ -1,0 +1,301 @@
+[gd_resource type="Resource" script_class="MoveSetData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/move_set_data.gd" id="1_dmj0l"]
+[ext_resource type="Script" path="res://scripts/data/move_slot_data.gd" id="2_tdn5r"]
+[ext_resource type="Script" path="res://scripts/data/attack_data.gd" id="3_ur7mu"]
+
+[sub_resource type="Resource" id="Resource_ubwin"]
+script = ExtResource("3_ur7mu")
+attack_id = &"myo-ryung-light-01"
+action_id = &"attack_light"
+combo_step = 1
+startup_ticks = 4
+active_ticks = 3
+recovery_ticks = 7
+damage = 4.0
+base_knockback = 120.0
+knockback_growth = 1.6
+visual_state_id = &"attack_light_combo_01"
+
+[sub_resource type="Resource" id="Resource_bb3s0"]
+script = ExtResource("2_tdn5r")
+slot_id = &"myo-ryung-light-01"
+attack = SubResource("Resource_ubwin")
+
+[sub_resource type="Resource" id="Resource_7euij"]
+script = ExtResource("3_ur7mu")
+attack_id = &"myo-ryung-light-02"
+action_id = &"attack_light"
+combo_step = 2
+startup_ticks = 4
+active_ticks = 3
+recovery_ticks = 7
+damage = 4.0
+base_knockback = 120.0
+knockback_growth = 1.6
+visual_state_id = &"attack_light_combo_02"
+
+[sub_resource type="Resource" id="Resource_3y5yb"]
+script = ExtResource("2_tdn5r")
+slot_id = &"myo-ryung-light-02"
+attack = SubResource("Resource_7euij")
+
+[sub_resource type="Resource" id="Resource_5v3ll"]
+script = ExtResource("3_ur7mu")
+attack_id = &"myo-ryung-light-03"
+action_id = &"attack_light"
+combo_step = 3
+startup_ticks = 4
+active_ticks = 3
+recovery_ticks = 7
+damage = 4.0
+base_knockback = 120.0
+knockback_growth = 1.6
+visual_state_id = &"attack_light_combo_03"
+
+[sub_resource type="Resource" id="Resource_j3cmh"]
+script = ExtResource("2_tdn5r")
+slot_id = &"myo-ryung-light-03"
+attack = SubResource("Resource_5v3ll")
+
+[sub_resource type="Resource" id="Resource_s7nve"]
+script = ExtResource("3_ur7mu")
+attack_id = &"myo-ryung-light-04"
+action_id = &"attack_light"
+combo_step = 4
+startup_ticks = 6
+active_ticks = 3
+recovery_ticks = 12
+damage = 7.0
+base_knockback = 210.0
+knockback_growth = 2.4
+is_finisher = true
+visual_state_id = &"attack_light_combo_04"
+
+[sub_resource type="Resource" id="Resource_l5evo"]
+script = ExtResource("2_tdn5r")
+slot_id = &"myo-ryung-light-04"
+attack = SubResource("Resource_s7nve")
+
+[sub_resource type="Resource" id="Resource_hg573"]
+script = ExtResource("3_ur7mu")
+attack_id = &"myo-ryung-light-up"
+action_id = &"attack_light"
+input_direction = 3
+startup_ticks = 5
+active_ticks = 3
+recovery_ticks = 9
+damage = 5.0
+base_knockback = 150.0
+knockback_growth = 1.8
+launch_vector = Vector2(0.25, -1)
+visual_state_id = &"attack_light_up"
+
+[sub_resource type="Resource" id="Resource_nqrk0"]
+script = ExtResource("2_tdn5r")
+slot_id = &"myo-ryung-light-up"
+attack = SubResource("Resource_hg573")
+
+[sub_resource type="Resource" id="Resource_kyaw8"]
+script = ExtResource("3_ur7mu")
+attack_id = &"myo-ryung-light-down"
+action_id = &"attack_light"
+input_direction = 4
+startup_ticks = 5
+active_ticks = 3
+recovery_ticks = 9
+damage = 5.0
+base_knockback = 150.0
+knockback_growth = 1.8
+launch_vector = Vector2(0.4, 0.65)
+visual_state_id = &"attack_light_down"
+
+[sub_resource type="Resource" id="Resource_nie57"]
+script = ExtResource("2_tdn5r")
+slot_id = &"myo-ryung-light-down"
+attack = SubResource("Resource_kyaw8")
+
+[sub_resource type="Resource" id="Resource_ynkrq"]
+script = ExtResource("3_ur7mu")
+attack_id = &"myo-ryung-heavy-side"
+action_id = &"attack_heavy"
+input_direction = 5
+startup_ticks = 10
+active_ticks = 4
+recovery_ticks = 16
+damage = 10.0
+base_knockback = 260.0
+knockback_growth = 3.0
+is_finisher = true
+visual_state_id = &"attack_heavy_side"
+
+[sub_resource type="Resource" id="Resource_k01ml"]
+script = ExtResource("2_tdn5r")
+slot_id = &"myo-ryung-heavy-side"
+attack = SubResource("Resource_ynkrq")
+
+[sub_resource type="Resource" id="Resource_mxocc"]
+script = ExtResource("3_ur7mu")
+attack_id = &"myo-ryung-heavy-up"
+action_id = &"attack_heavy"
+input_direction = 3
+startup_ticks = 10
+active_ticks = 4
+recovery_ticks = 16
+damage = 10.0
+base_knockback = 260.0
+knockback_growth = 3.0
+launch_vector = Vector2(0.25, -1)
+is_finisher = true
+is_launcher = true
+visual_state_id = &"attack_heavy_up"
+
+[sub_resource type="Resource" id="Resource_hyjey"]
+script = ExtResource("2_tdn5r")
+slot_id = &"myo-ryung-heavy-up"
+attack = SubResource("Resource_mxocc")
+
+[sub_resource type="Resource" id="Resource_u230v"]
+script = ExtResource("3_ur7mu")
+attack_id = &"myo-ryung-heavy-down"
+action_id = &"attack_heavy"
+input_direction = 4
+startup_ticks = 10
+active_ticks = 4
+recovery_ticks = 16
+damage = 10.0
+base_knockback = 260.0
+knockback_growth = 3.0
+launch_vector = Vector2(0.4, 0.65)
+is_finisher = true
+visual_state_id = &"attack_heavy_down"
+
+[sub_resource type="Resource" id="Resource_o1j7m"]
+script = ExtResource("2_tdn5r")
+slot_id = &"myo-ryung-heavy-down"
+attack = SubResource("Resource_u230v")
+
+[sub_resource type="Resource" id="Resource_uxk10"]
+script = ExtResource("3_ur7mu")
+attack_id = &"myo-ryung-dash-light"
+action_id = &"attack_light"
+input_direction = 5
+requires_dash = true
+startup_ticks = 5
+active_ticks = 3
+recovery_ticks = 9
+damage = 6.0
+base_knockback = 170.0
+knockback_growth = 2.0
+visual_state_id = &"attack_dash_light"
+
+[sub_resource type="Resource" id="Resource_2cew7"]
+script = ExtResource("2_tdn5r")
+slot_id = &"myo-ryung-dash-light"
+attack = SubResource("Resource_uxk10")
+
+[sub_resource type="Resource" id="Resource_afynq"]
+script = ExtResource("3_ur7mu")
+attack_id = &"myo-ryung-dash-heavy"
+action_id = &"attack_heavy"
+input_direction = 5
+requires_dash = true
+startup_ticks = 8
+active_ticks = 4
+recovery_ticks = 14
+damage = 10.0
+base_knockback = 240.0
+knockback_growth = 2.8
+is_finisher = true
+visual_state_id = &"attack_dash_heavy"
+
+[sub_resource type="Resource" id="Resource_nhvq1"]
+script = ExtResource("2_tdn5r")
+slot_id = &"myo-ryung-dash-heavy"
+attack = SubResource("Resource_afynq")
+
+[sub_resource type="Resource" id="Resource_vjyvg"]
+script = ExtResource("3_ur7mu")
+attack_id = &"myo-ryung-air-light"
+action_id = &"attack_light"
+input_direction = 6
+activation_context = 1
+startup_ticks = 5
+active_ticks = 3
+recovery_ticks = 9
+damage = 5.0
+base_knockback = 150.0
+knockback_growth = 1.8
+visual_state_id = &"attack_air_light"
+
+[sub_resource type="Resource" id="Resource_tohgj"]
+script = ExtResource("2_tdn5r")
+slot_id = &"myo-ryung-air-light"
+attack = SubResource("Resource_vjyvg")
+
+[sub_resource type="Resource" id="Resource_4d71a"]
+script = ExtResource("3_ur7mu")
+attack_id = &"myo-ryung-air-heavy"
+action_id = &"attack_heavy"
+input_direction = 6
+activation_context = 1
+startup_ticks = 8
+active_ticks = 4
+recovery_ticks = 14
+damage = 9.0
+base_knockback = 230.0
+knockback_growth = 2.7
+is_finisher = true
+visual_state_id = &"attack_air_heavy"
+
+[sub_resource type="Resource" id="Resource_fnocj"]
+script = ExtResource("2_tdn5r")
+slot_id = &"myo-ryung-air-heavy"
+attack = SubResource("Resource_4d71a")
+
+[sub_resource type="Resource" id="Resource_7uisy"]
+script = ExtResource("3_ur7mu")
+attack_id = &"myo-ryung-special-neutral"
+action_id = &"attack_special"
+activation_context = 2
+startup_ticks = 8
+active_ticks = 8
+recovery_ticks = 16
+damage = 3.0
+base_knockback = 90.0
+knockback_growth = 1.0
+max_hits_per_target = 3
+rehit_interval_ticks = 3
+visual_state_id = &"special_neutral"
+
+[sub_resource type="Resource" id="Resource_4wf7n"]
+script = ExtResource("2_tdn5r")
+slot_id = &"myo-ryung-special-neutral"
+attack = SubResource("Resource_7uisy")
+
+[sub_resource type="Resource" id="Resource_j5kct"]
+script = ExtResource("3_ur7mu")
+attack_id = &"myo-ryung-special-up"
+action_id = &"attack_special"
+input_direction = 3
+activation_context = 2
+startup_ticks = 6
+active_ticks = 5
+recovery_ticks = 18
+damage = 7.0
+base_knockback = 190.0
+knockback_growth = 2.3
+launch_vector = Vector2(0.2, -1)
+self_impulse = Vector2(0, -440)
+visual_state_id = &"special_up"
+
+[sub_resource type="Resource" id="Resource_l16su"]
+script = ExtResource("2_tdn5r")
+slot_id = &"myo-ryung-special-up"
+attack = SubResource("Resource_j5kct")
+
+[resource]
+script = ExtResource("1_dmj0l")
+move_set_id = &"myo-ryung.base"
+slots = Array[ExtResource("2_tdn5r")]([SubResource("Resource_bb3s0"), SubResource("Resource_3y5yb"), SubResource("Resource_j3cmh"), SubResource("Resource_l5evo"), SubResource("Resource_nqrk0"), SubResource("Resource_nie57"), SubResource("Resource_k01ml"), SubResource("Resource_hyjey"), SubResource("Resource_o1j7m"), SubResource("Resource_2cew7"), SubResource("Resource_nhvq1"), SubResource("Resource_tohgj"), SubResource("Resource_fnocj"), SubResource("Resource_4wf7n"), SubResource("Resource_l16su")])
+combo_count = 4

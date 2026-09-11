@@ -1,12 +1,12 @@
-[gd_resource type="Resource" script_class="CharacterData" load_steps=4 format=3]
+[gd_resource type="Resource" script_class="CharacterData" format=3]
 
 [ext_resource type="Script" path="res://scripts/data/character_data.gd" id="1_data"]
+[ext_resource type="Resource" path="res://assets/combat/movesets/nabi_moveset.tres" id="1_ys87v"]
 [ext_resource type="Script" path="res://scripts/data/character_stats.gd" id="2_stats"]
 [ext_resource type="Texture2D" path="res://assets/character/nabi/concept/nabi-concept-v01.png" id="3_image"]
 
 [sub_resource type="Resource" id="CharacterStats_nabi"]
 script = ExtResource("2_stats")
-survivability = 100.0
 weight = 0.92
 ground_speed = 335.0
 air_speed = 315.0
@@ -14,11 +14,9 @@ jump_velocity = 550.0
 gravity = 1380.0
 dash_speed = 545.0
 dash_duration_seconds = 0.17
-air_jump_count = 1
 
 [resource]
 script = ExtResource("1_data")
-schema_version = 1
 character_id = &"nabi"
 display_name = "나비"
 concept_asset_id = &"nabi-concept-v01"
@@ -29,5 +27,5 @@ combat_role = "기동형 근접 압박가"
 tags = Array[StringName]([&"cat-theme", &"striker", &"mobile", &"white-tail"])
 move_slot_ids = Array[StringName]([&"nabi-claw-jab", &"nabi-pounce-slash", &"nabi-guard-rake"])
 passive_description = "빠른 진입 뒤 짧은 거리에서 압박을 이어가는 것을 지향한다. 실제 효과는 향후 PassiveData에서 정의한다."
-job_tree_ids = Array[StringName]([])
 base_stats = SubResource("CharacterStats_nabi")
+base_move_set = ExtResource("1_ys87v")

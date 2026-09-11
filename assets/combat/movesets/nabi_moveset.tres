@@ -1,0 +1,262 @@
+[gd_resource type="Resource" script_class="MoveSetData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/move_set_data.gd" id="1_2kfo1"]
+[ext_resource type="Script" path="res://scripts/data/move_slot_data.gd" id="2_0te4x"]
+[ext_resource type="Script" path="res://scripts/data/attack_data.gd" id="3_2oweq"]
+
+[sub_resource type="Resource" id="Resource_lkre4"]
+script = ExtResource("3_2oweq")
+attack_id = &"nabi-light-01"
+action_id = &"attack_light"
+combo_step = 1
+startup_ticks = 4
+active_ticks = 3
+recovery_ticks = 7
+damage = 4.0
+base_knockback = 120.0
+knockback_growth = 1.6
+visual_state_id = &"attack_light_combo_01"
+
+[sub_resource type="Resource" id="Resource_4quu7"]
+script = ExtResource("2_0te4x")
+slot_id = &"nabi-light-01"
+attack = SubResource("Resource_lkre4")
+
+[sub_resource type="Resource" id="Resource_mptru"]
+script = ExtResource("3_2oweq")
+attack_id = &"nabi-light-02"
+action_id = &"attack_light"
+combo_step = 2
+startup_ticks = 6
+active_ticks = 3
+recovery_ticks = 12
+damage = 7.0
+base_knockback = 210.0
+knockback_growth = 2.4
+is_finisher = true
+visual_state_id = &"attack_light_combo_02"
+
+[sub_resource type="Resource" id="Resource_pbklk"]
+script = ExtResource("2_0te4x")
+slot_id = &"nabi-light-02"
+attack = SubResource("Resource_mptru")
+
+[sub_resource type="Resource" id="Resource_wxg6m"]
+script = ExtResource("3_2oweq")
+attack_id = &"nabi-light-up"
+action_id = &"attack_light"
+input_direction = 3
+startup_ticks = 5
+active_ticks = 3
+recovery_ticks = 9
+damage = 5.0
+base_knockback = 150.0
+knockback_growth = 1.8
+launch_vector = Vector2(0.25, -1)
+visual_state_id = &"attack_light_up"
+
+[sub_resource type="Resource" id="Resource_u400a"]
+script = ExtResource("2_0te4x")
+slot_id = &"nabi-light-up"
+attack = SubResource("Resource_wxg6m")
+
+[sub_resource type="Resource" id="Resource_cfpns"]
+script = ExtResource("3_2oweq")
+attack_id = &"nabi-light-down"
+action_id = &"attack_light"
+input_direction = 4
+startup_ticks = 5
+active_ticks = 3
+recovery_ticks = 9
+damage = 5.0
+base_knockback = 150.0
+knockback_growth = 1.8
+launch_vector = Vector2(0.4, 0.65)
+visual_state_id = &"attack_light_down"
+
+[sub_resource type="Resource" id="Resource_rnlkn"]
+script = ExtResource("2_0te4x")
+slot_id = &"nabi-light-down"
+attack = SubResource("Resource_cfpns")
+
+[sub_resource type="Resource" id="Resource_ju8o8"]
+script = ExtResource("3_2oweq")
+attack_id = &"nabi-heavy-side"
+action_id = &"attack_heavy"
+input_direction = 5
+startup_ticks = 10
+active_ticks = 4
+recovery_ticks = 16
+damage = 10.0
+base_knockback = 260.0
+knockback_growth = 3.0
+is_finisher = true
+visual_state_id = &"attack_heavy_side"
+
+[sub_resource type="Resource" id="Resource_aiecc"]
+script = ExtResource("2_0te4x")
+slot_id = &"nabi-heavy-side"
+attack = SubResource("Resource_ju8o8")
+
+[sub_resource type="Resource" id="Resource_hbsba"]
+script = ExtResource("3_2oweq")
+attack_id = &"nabi-heavy-up"
+action_id = &"attack_heavy"
+input_direction = 3
+startup_ticks = 10
+active_ticks = 4
+recovery_ticks = 16
+damage = 10.0
+base_knockback = 260.0
+knockback_growth = 3.0
+launch_vector = Vector2(0.25, -1)
+is_finisher = true
+is_launcher = true
+visual_state_id = &"attack_heavy_up"
+
+[sub_resource type="Resource" id="Resource_5dl4c"]
+script = ExtResource("2_0te4x")
+slot_id = &"nabi-heavy-up"
+attack = SubResource("Resource_hbsba")
+
+[sub_resource type="Resource" id="Resource_nd30s"]
+script = ExtResource("3_2oweq")
+attack_id = &"nabi-heavy-down"
+action_id = &"attack_heavy"
+input_direction = 4
+startup_ticks = 10
+active_ticks = 4
+recovery_ticks = 16
+damage = 10.0
+base_knockback = 260.0
+knockback_growth = 3.0
+launch_vector = Vector2(0.4, 0.65)
+is_finisher = true
+visual_state_id = &"attack_heavy_down"
+
+[sub_resource type="Resource" id="Resource_o1ss7"]
+script = ExtResource("2_0te4x")
+slot_id = &"nabi-heavy-down"
+attack = SubResource("Resource_nd30s")
+
+[sub_resource type="Resource" id="Resource_1wgmw"]
+script = ExtResource("3_2oweq")
+attack_id = &"nabi-dash-light"
+action_id = &"attack_light"
+input_direction = 5
+requires_dash = true
+startup_ticks = 5
+active_ticks = 3
+recovery_ticks = 9
+damage = 6.0
+base_knockback = 170.0
+knockback_growth = 2.0
+visual_state_id = &"attack_dash_light"
+
+[sub_resource type="Resource" id="Resource_fmxm2"]
+script = ExtResource("2_0te4x")
+slot_id = &"nabi-dash-light"
+attack = SubResource("Resource_1wgmw")
+
+[sub_resource type="Resource" id="Resource_f8afj"]
+script = ExtResource("3_2oweq")
+attack_id = &"nabi-dash-heavy"
+action_id = &"attack_heavy"
+input_direction = 5
+requires_dash = true
+startup_ticks = 8
+active_ticks = 4
+recovery_ticks = 14
+damage = 10.0
+base_knockback = 240.0
+knockback_growth = 2.8
+is_finisher = true
+visual_state_id = &"attack_dash_heavy"
+
+[sub_resource type="Resource" id="Resource_a2igl"]
+script = ExtResource("2_0te4x")
+slot_id = &"nabi-dash-heavy"
+attack = SubResource("Resource_f8afj")
+
+[sub_resource type="Resource" id="Resource_qtnb0"]
+script = ExtResource("3_2oweq")
+attack_id = &"nabi-air-light"
+action_id = &"attack_light"
+input_direction = 6
+activation_context = 1
+startup_ticks = 5
+active_ticks = 3
+recovery_ticks = 9
+damage = 5.0
+base_knockback = 150.0
+knockback_growth = 1.8
+visual_state_id = &"attack_air_light"
+
+[sub_resource type="Resource" id="Resource_dun02"]
+script = ExtResource("2_0te4x")
+slot_id = &"nabi-air-light"
+attack = SubResource("Resource_qtnb0")
+
+[sub_resource type="Resource" id="Resource_slqb3"]
+script = ExtResource("3_2oweq")
+attack_id = &"nabi-air-heavy"
+action_id = &"attack_heavy"
+input_direction = 6
+activation_context = 1
+startup_ticks = 8
+active_ticks = 4
+recovery_ticks = 14
+damage = 9.0
+base_knockback = 230.0
+knockback_growth = 2.7
+is_finisher = true
+visual_state_id = &"attack_air_heavy"
+
+[sub_resource type="Resource" id="Resource_3vtlt"]
+script = ExtResource("2_0te4x")
+slot_id = &"nabi-air-heavy"
+attack = SubResource("Resource_slqb3")
+
+[sub_resource type="Resource" id="Resource_88mki"]
+script = ExtResource("3_2oweq")
+attack_id = &"nabi-special-neutral"
+action_id = &"attack_special"
+activation_context = 2
+startup_ticks = 8
+active_ticks = 4
+recovery_ticks = 16
+damage = 8.0
+base_knockback = 220.0
+knockback_growth = 2.6
+visual_state_id = &"special_neutral"
+
+[sub_resource type="Resource" id="Resource_ms2jt"]
+script = ExtResource("2_0te4x")
+slot_id = &"nabi-special-neutral"
+attack = SubResource("Resource_88mki")
+
+[sub_resource type="Resource" id="Resource_7m3h7"]
+script = ExtResource("3_2oweq")
+attack_id = &"nabi-special-up"
+action_id = &"attack_special"
+input_direction = 3
+activation_context = 2
+startup_ticks = 6
+active_ticks = 5
+recovery_ticks = 18
+damage = 7.0
+base_knockback = 190.0
+knockback_growth = 2.3
+launch_vector = Vector2(0.2, -1)
+self_impulse = Vector2(0, -440)
+visual_state_id = &"special_up"
+
+[sub_resource type="Resource" id="Resource_piejl"]
+script = ExtResource("2_0te4x")
+slot_id = &"nabi-special-up"
+attack = SubResource("Resource_7m3h7")
+
+[resource]
+script = ExtResource("1_2kfo1")
+move_set_id = &"nabi.base"
+slots = Array[ExtResource("2_0te4x")]([SubResource("Resource_4quu7"), SubResource("Resource_pbklk"), SubResource("Resource_u400a"), SubResource("Resource_rnlkn"), SubResource("Resource_aiecc"), SubResource("Resource_5dl4c"), SubResource("Resource_o1ss7"), SubResource("Resource_fmxm2"), SubResource("Resource_a2igl"), SubResource("Resource_dun02"), SubResource("Resource_3vtlt"), SubResource("Resource_ms2jt"), SubResource("Resource_piejl")])

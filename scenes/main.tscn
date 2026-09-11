@@ -8,6 +8,9 @@
 [ext_resource type="Resource" path="res://assets/combat/phase1_combat_rules.tres" id="6_rules"]
 [ext_resource type="Script" path="res://scripts/touch_command_source.gd" id="7_touch"]
 [ext_resource type="Script" path="res://scripts/combat_camera.gd" id="8_camera"]
+[ext_resource type="Resource" path="res://assets/loadouts/default_loadout_catalog.tres" id="9_catalog"]
+[ext_resource type="Resource" path="res://assets/loadouts/default_ja_hyun_selection.tres" id="10_player_selection"]
+[ext_resource type="Resource" path="res://assets/loadouts/default_myo_ryung_selection.tres" id="11_dummy_selection"]
 [sub_resource type="RectangleShape2D" id="GroundShape"]
 size = Vector2(1080, 48)
 [sub_resource type="RectangleShape2D" id="PlatformShape"]
@@ -66,6 +69,9 @@ script = ExtResource("5_match")
 rules = ExtResource("6_rules")
 player = NodePath("../World/Player")
 training_dummy = NodePath("../World/TrainingDummy")
+loadout_catalog = ExtResource("9_catalog")
+player_selection = ExtResource("10_player_selection")
+training_dummy_selection = ExtResource("11_dummy_selection")
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(640, 360)
 position_smoothing_enabled = true
