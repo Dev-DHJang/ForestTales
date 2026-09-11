@@ -1,6 +1,6 @@
 ---
 name: forest-arena-product
-description: Maintain Forest Arena product rules, Phase scope, loadout intent, acceptance criteria, and ADR proposals.
+description: Forest Arena 제품 규칙·Phase 범위·로드아웃 의도·수용 기준·ADR 제안을 관리한다.
 ---
 
 # Forest Arena 제품

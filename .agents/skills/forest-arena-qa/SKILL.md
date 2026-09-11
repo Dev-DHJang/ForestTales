@@ -1,6 +1,6 @@
 ---
 name: forest-arena-qa
-description: Independently verify Forest Arena requirements, boundaries, gameplay, UX, contracts, assets, and release evidence.
+description: Forest Arena 요구사항·경계·게임플레이·UX·계약·자산·릴리스 증적을 독립 검증한다.
 ---
 
 # Forest Arena QA
@@ -9,7 +9,7 @@ description: Independently verify Forest Arena requirements, boundaries, gamepla
 
 - 사용자 경험, 전투, 계약, 데이터, 에셋, 플랫폼 또는 릴리스 변경의 독립 검토에 사용한다.
 - 캐릭터 콘셉트는 입력 충족, 독창성·권리, 최대 줌아웃 실루엣과 배경 대비를 forest-arena-character-design과 독립적으로 검토한다.
-- 캐릭터 모션은 16프레임, 128×128 셀·2048×128 시트, alpha, 프레임 순서·잘림, 기준 방향, FPS·루프, SpriteFrames 참조, manifest 기록과 모션별 명시 승인을 forest-arena-character-motion과 독립적으로 검토한다.
+- 캐릭터 모션은 16프레임, 128×128 셀·2048×128 시트, alpha, 프레임 순서·잘림, 기준 방향, FPS·루프, SpriteFrames 참조, manifest 기록과 모션별 명시 승인을 forest-arena-2d-animation과 독립적으로 검토한다.
 - 단순 문구 수정은 오케스트레이터 검토만으로 충분할 수 있다.
 
 ## 필수 입력

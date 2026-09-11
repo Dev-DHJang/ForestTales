@@ -1,6 +1,6 @@
 ---
 name: forest-arena-character-design
-description: Design original Forest Arena playable-animal character concepts, collect the complete prompt brief, review them, and register only user-approved assets.
+description: 독창적 Forest Arena 플레이 동물 캐릭터 콘셉트를 설계하고 사용자 승인 자산만 등록한다.
 ---
 
 # Forest Arena 캐릭터 디자인

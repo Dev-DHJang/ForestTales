@@ -200,3 +200,16 @@ accepted 상태 변경에는 사용자 승인 근거와 날짜가 필요하다.
 - 검증: 하네스가 17개 skill ID, 팀 라우팅, `ForestArenaResources` Autoload와 337개 logical asset/22개 품질 의존 asset을 검사한다.
 - 대체/롤백: 두 역할과 Autoload를 제거할 때 팀 명세·하네스 검사·AGENTS 리소스 맵을 함께 롤백한다.
 - 승인 근거: 2026-09-11 사용자가 Godot 패키지 통합 계획에서 두 스킬을 17개 정식 역할로 취급하도록 선택하고 구현을 승인.
+
+## ADR-018: 14개 역할 하네스 통합과 자동 버전 관리
+
+- 상태: accepted
+- 날짜: 2026-09-11
+- 적용 Phase: 2 이후
+- 배경: Godot UI·캐릭터 모션·버전 관리 역할이 각각 UI·2D 애니메이션·오케스트레이션과 분리되어 책임 경계와 증적 규칙이 중복됐다. 활성 문서에는 Phase 2 상태와 맞지 않는 Phase 0 표현도 남아 있었다.
+- 결정: 활성 역할은 14개로 운영한다. `forest-arena-ui`가 Godot 비전투 UI와 `ForestArenaResources` 소비를, `forest-arena-2d-animation`이 승인 캐릭터의 idle·jump·run과 모션별 승인 게이트를, `forest-arena-orchestrator`가 브랜치·관련 commit·push·PR·QA 뒤 `develop` 병합·롤백 증적을 소유한다. 팀 명세의 역할 표가 단일 원본이며 검증기는 그 표에서 실제 스킬 목록을 동적으로 비교한다. 기본 증적은 `00_request.md`와 `04_closeout.md`이고 계약·인수인계·독립 QA 파일은 필요할 때만 추가한다.
+- 버전 관리 범위: 사용자의 구현·수정·완료 요청은 일반 작업 브랜치, commit, push, PR과 `develop` 병합 권한을 포함한다. `main` 승격, release/hotfix, 강제 push, 이력 재작성, 원격 브랜치 삭제, 계정·권한·비밀정보 변경은 제외하며 플랫폼 보안 확인은 우회하지 않는다.
+- 영향: ADR-017의 활성 17개 역할 운영 결정을 이 ADR로 대체한다. ADR-014와 ADR-017의 당시 수치·승인 근거는 감사 기록으로 보존한다. Godot Autoload·337개 논리 리소스·22개 품질 변형, 외형 승인 경계와 Phase 7 온라인 게이트는 유지한다.
+- 검증: `./scripts/verify-harness.sh`, `./scripts/verify.sh`, Godot 리소스 검증, 활성 문서의 제거 역할·고정 역할 수·현재 Phase 0 표현 검사와 `git diff --check`를 실행한다.
+- 대체/롤백: 역할을 다시 분리하려면 새 ADR에서 소유권, 스킬, 팀 명세와 동적 검증을 함께 변경한다.
+- 승인 근거: 2026-09-11 사용자가 14개 역할 통합, 활성 문서 한국어화, 적응형 증적과 일반 원격 통합 자동 범위를 명시 승인.

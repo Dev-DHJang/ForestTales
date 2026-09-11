@@ -34,11 +34,12 @@ Forest Arena는 독창적인 3등신 동물 캐릭터가 싸우는 Godot 4 기�
     ./scripts/export-debug-android.sh
     ./scripts/verify-android-emulator.sh
 
-`./scripts/verify.sh`는 headless 편집기 로드, Phase 0 smoke, manifest 기반 CharacterData·캐릭터 외형·승인 모션 계약, 공격·비전투 UI 설계 계약, 하네스 구조 검사를 묶는 기본 로컬 검증이다. `./scripts/verify-harness.sh`는 스킬·문서·라우팅만 빠르게 확인한다.
+`./scripts/verify.sh`는 headless 편집기 로드, Phase 0 기반 smoke, Phase 1 전투와 Phase 2 로드아웃, manifest 기반 CharacterData·캐릭터 외형·승인 모션 계약, 공격·비전투 UI 설계 계약, 하네스 구조 검사를 묶는 기본 로컬 검증이다. `./scripts/verify-harness.sh`는 스킬·문서·라우팅만 빠르게 확인한다.
 
 ## 현재 상태
 
-- 완료: Phase 1 결정론적 전투 vertical slice(PR #6, `665757b`), 17개 역할 하네스·Godot 리소스 카탈로그(PR #7, `038090b`), 그리고 Phase 2 versioned loadout 계약·런타임 주입.
+- 완료: Phase 1 결정론적 전투 수직 슬라이스(PR #6, `665757b`), Godot 리소스 카탈로그(PR #7, `038090b`), 그리고 Phase 2 버전 로드아웃 계약·런타임 주입.
+- 현재: 14개 역할 하네스가 활성 역할의 단일 원본이며, 정식 선택 UI·성장·경제·Phase 3 이후 전투 확장은 미구현이다.
 - 승인된 선행 콘텐츠: 자현·묘령·나비의 CharacterData와 콘셉트 등록, 세 캐릭터의 idle/run/stationary jump 모션 패키지. 이는 Phase 1 전투 완료나 현재 런타임 장면 연결을 뜻하지 않는다.
 - 공격 체계: 세 fighter의 공격은 외부 `AttackData`·`MoveSetData` 리소스로 보존되며, Phase 1의 실제 공격·판정·입력 UI가 동작한다.
 - UI 설계 기반: 24개 `SCR_*` 화면, 61개 `IMG/*` 요구 에셋과 로컬 Penpot MCP 작업 계약을 확정했다. 실제 Godot 화면·이미지·Penpot 파일은 아직 만들지 않았다.

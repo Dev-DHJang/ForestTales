@@ -1,6 +1,6 @@
 ---
 name: forest-arena-image-design
-description: Create original Forest Arena concepts, portraits, icons, UI images, and backgrounds for small Android screens.
+description: 작은 Android 화면용 독창적 Forest Arena 콘셉트·초상화·아이콘·UI 이미지·배경을 제작한다.
 ---
 
 # Forest Arena 이미지 디자인

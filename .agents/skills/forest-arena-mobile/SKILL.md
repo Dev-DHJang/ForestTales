@@ -1,6 +1,6 @@
 ---
 name: forest-arena-mobile
-description: Implement and verify Forest Arena Android lifecycle, touch, packaging, performance, and device diagnostics.
+description: Forest Arena Android 생명주기·터치·패키징·성능·기기 진단을 구현하고 검증한다.
 ---
 
 # Forest Arena 모바일

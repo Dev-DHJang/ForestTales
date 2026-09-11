@@ -1,6 +1,6 @@
 ---
 name: forest-arena-multiplayer
-description: Implement Forest Arena online match semantics only in Phase 7 or later after approved contracts exist.
+description: 승인된 계약이 있는 Phase 7 이후에만 Forest Arena 온라인 매치 의미를 구현한다.
 ---
 
 # Forest Arena 멀티플레이
