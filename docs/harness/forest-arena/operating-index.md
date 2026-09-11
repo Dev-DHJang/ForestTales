@@ -55,6 +55,6 @@
 | character-appearance-contract | 완료 | 자현·묘령·나비 외형 JSON 계약·생성 템플릿·자동 검사, PR #4 `develop` 병합 |
 | forest-arena-godot-package-v2 | 완료 | 337개 logical resource 카탈로그, `ForestArenaResources` Autoload, Godot UI·리소스 역할과 17개 역할 하네스 통합; 실제 Android 기기 미검증 |
 | phase-1-core-combat | 완료 | PR #6 `665757b` 병합, 로컬·에뮬레이터 QA 증적 유지; 실제 기기 미검증 |
-| phase-2-loadout | 진행 중 | versioned Resource·결정론적 조합·fighter runtime 주입·closeout QA |
+| phase-2-loadout | 완료 | PR #8 `c256070` 병합; versioned Resource·결정론적 조합·fighter runtime 주입. Android 설치·생명주기와 실제 기기는 미검증 |
 
 원본 `_workspace/<topic>/` 증적은 감사와 재개를 위해 이동·삭제하지 않는다. 과거 시안 경로나 버전명은 당시 의사결정 증거이므로 현재 자산 경로와 달라도 이 색인의 상태 정보로만 구분한다.
