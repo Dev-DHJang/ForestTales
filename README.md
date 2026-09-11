@@ -38,7 +38,7 @@ Forest Arena는 독창적인 3등신 동물 캐릭터가 싸우는 Godot 4 기�
 
 ## 현재 상태
 
-- 완료: 제품 문서, 15개 역할 스킬, 팀 명세, Godot 프로젝트, 의미 InputMap, 임시 2D 경기장과 Phase 0 smoke test.
+- 완료: 제품 문서, 17개 역할 스킬(기존 역할과 Godot UI·리소스 역할), 팀 명세, Godot 프로젝트, 의미 InputMap, 임시 2D 경기장과 Phase 0 smoke test.
 - 승인된 선행 콘텐츠: 자현·묘령·나비의 CharacterData와 콘셉트 등록, 세 캐릭터의 idle/run/stationary jump 모션 패키지. 이는 Phase 1 전투 완료나 현재 런타임 장면 연결을 뜻하지 않는다.
 - 공격 체계: 전체 공격 콘셉트 v01과 자동 문서 계약을 완료했다. Phase 1의 실제 공격·판정·입력 UI는 아직 구현하지 않았다.
 - UI 설계 기반: 24개 `SCR_*` 화면, 61개 `IMG/*` 요구 에셋과 로컬 Penpot MCP 작업 계약을 확정했다. 실제 Godot 화면·이미지·Penpot 파일은 아직 만들지 않았다.

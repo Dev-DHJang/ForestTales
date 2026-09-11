@@ -1,0 +1,10 @@
+{
+  "reference_resolution": [
+    1920,
+    1080
+  ],
+  "stretchable_node": "NinePatchRect",
+  "fixed_image_node": "TextureRect",
+  "text": "native Godot Label/Button",
+  "quality_rule": "Only registry quality_dependent=true resources have variants."
+}

@@ -1,5 +1,6 @@
 .DS_Store
 .godot/
+.forest-arena-backup/
 android/
 
 build/*

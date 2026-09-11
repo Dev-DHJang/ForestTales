@@ -20,3 +20,12 @@
 - 기본 로컬 검증은 `./scripts/verify.sh`이며, Phase 0 smoke·캐릭터 자산 계약·승인 모션 계약·하네스 검증을 순서대로 실행한다. 하네스 전용 변경은 `./scripts/verify-harness.sh`를 함께 실행한다.
 - 역할, 요청 라우팅, 작업 증적 상태와 Android 검증 명령은 docs/harness/forest-arena/operating-index.md를 기준으로 확인한다.
 - 비전투 UI 설계는 docs/ui/non-combat-ui-v01.json과 assets/ui/asset-requirements.csv를 계약 원본으로 사용하며, Penpot 절차는 docs/ui/penpot-setup.md를 따른다.
+
+<!-- FOREST_ARENA_GODOT:START -->
+## Forest Arena / Godot resource map
+- Resource skill: `.agents/skills/forest-arena-godot-resources/SKILL.md`
+- UI skill: `.agents/skills/forest-arena-godot-ui/SKILL.md`
+- Setup: `docs/forest_arena/GODOT_SETUP.md`
+- Registry: `forest_arena/data/resource_registry.json`
+- Verify: `python tools/forest_arena/verify_godot_resources.py --project-root .`
+<!-- FOREST_ARENA_GODOT:END -->

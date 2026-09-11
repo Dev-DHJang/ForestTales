@@ -1,0 +1,17 @@
+{
+  "timestamp": "20260911-185907",
+  "project_root": "/Users/jdh/Desktop/workspace/ForestTales",
+  "backup_root": "/Users/jdh/Desktop/workspace/ForestTales/.forest-arena-backup/20260911-185907",
+  "changes": [
+    "added:.agents/skills/forest-arena-godot-ui/SKILL.md",
+    "added:.agents/skills/forest-arena-godot-resources/SKILL.md",
+    "added:docs/forest_arena/RESOURCE_RULES.md",
+    "added:docs/forest_arena/GODOT_SETUP.md",
+    "added:tools/forest_arena/verify_godot_resources.py",
+    "added:harness/forest_arena_godot/codex_apply_contract.json",
+    "updated:AGENTS.md",
+    "updated:project.godot"
+  ],
+  "verify_return_code": 0,
+  "verify_output": "OK: 337 logical assets\nQuality-dependent assets: 22 (high/medium/low)"
+}

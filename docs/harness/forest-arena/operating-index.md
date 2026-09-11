@@ -53,5 +53,6 @@
 | forest-arena-ui-foundation | 완료 | 브랜드 전환, UI·에셋 계약, Penpot 하네스와 자동 검사; 외부 Penpot·이미지·Godot 화면 미실행 |
 | phase-0-stabilization | 완료 | 계약·문서·Git 기준선 정합화, 전체 로컬·Android 에뮬레이터 QA와 PR #2 `develop` 병합 |
 | character-appearance-contract | 완료 | 자현·묘령·나비 외형 JSON 계약·생성 템플릿·자동 검사, PR #4 `develop` 병합 |
+| forest-arena-godot-package-v2 | 완료 | 337개 logical resource 카탈로그, `ForestArenaResources` Autoload, Godot UI·리소스 역할과 17개 역할 하네스 통합; 실제 Android 기기 미검증 |
 
 원본 `_workspace/<topic>/` 증적은 감사와 재개를 위해 이동·삭제하지 않는다. 과거 시안 경로나 버전명은 당시 의사결정 증거이므로 현재 자산 경로와 달라도 이 색인의 상태 정보로만 구분한다.

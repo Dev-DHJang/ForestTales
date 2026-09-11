@@ -42,6 +42,7 @@
 | ADR-014 | Forest Arena 브랜드·Android 식별자 전환 | 0 | accepted |
 | ADR-015 | 미래 모드·참가 인원·장신구 무등급 규칙 | 6/7 이후 | accepted |
 | ADR-016 | 동시 최종 링아웃 서든데스 | 1 | accepted |
+| ADR-017 | Godot 리소스 역할과 17개 하네스 체계 | 0 이후 | accepted |
 
 accepted 상태 변경에는 사용자 승인 근거와 날짜가 필요하다.
 
@@ -186,3 +187,16 @@ accepted 상태 변경에는 사용자 승인 근거와 날짜가 필요하다.
 - 검증: UI 계약 테스트가 다섯 모드, 최대 8명, 팀당 1~4명, Splash 캐릭터 금지와 장신구 희귀도 금지를 검사한다.
 - 대체/롤백: 참가 규칙 또는 장신구 정책을 바꾸려면 새 ADR로 대체하고 화면·에셋 계약과 소비자를 함께 마이그레이션한다.
 - 승인 근거: 2026-09-09 사용자가 Forest Arena 브랜드 전환 및 Penpot UI 설계 기반 통합 계획의 구현을 명시 승인.
+
+## ADR-017: Godot 리소스 역할과 17개 하네스 체계
+
+- 상태: accepted
+- 날짜: 2026-09-11
+- 적용 Phase: 0 이후
+- 배경: Godot 리소스 패키지가 logical ID·품질 변형·Autoload와 이를 소비하는 비전투 UI 역할을 추가하므로 기존 15개 역할 하네스에 명시적 소유권이 필요하다.
+- 결정: 기존 15개 역할을 유지하고 `forest-arena-godot-resources`와 `forest-arena-godot-ui`를 정식 역할로 추가해 17개 역할로 운영한다. 기존 `ui`는 제품·터치·Penpot UX를, `godot-ui`는 등록 리소스를 소비하는 Godot 비전투 UI를, `godot-resources`는 registry·품질 변형·Autoload를 소유한다.
+- 대안: 두 스킬을 하네스 외 지원 파일로 두거나 기존 UI·contracts 역할에 흡수한다.
+- 영향: ADR-014의 15개 스킬 검증 수는 이 결정으로 대체된다. `res://forest_arena/` 카탈로그는 기존 캐릭터·`IMG/*` 승인 계약을 대체하지 않는다.
+- 검증: 하네스가 17개 skill ID, 팀 라우팅, `ForestArenaResources` Autoload와 337개 logical asset/22개 품질 의존 asset을 검사한다.
+- 대체/롤백: 두 역할과 Autoload를 제거할 때 팀 명세·하네스 검사·AGENTS 리소스 맵을 함께 롤백한다.
+- 승인 근거: 2026-09-11 사용자가 Godot 패키지 통합 계획에서 두 스킬을 17개 정식 역할로 취급하도록 선택하고 구현을 승인.
