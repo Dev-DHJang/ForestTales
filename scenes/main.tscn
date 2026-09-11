@@ -1,70 +1,78 @@
-[gd_scene load_steps=8 format=3]
+[gd_scene load_steps=13 format=3]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_main"]
 [ext_resource type="Script" path="res://scripts/arena_visual.gd" id="2_arena"]
-[ext_resource type="Script" path="res://scripts/fighter_stub.gd" id="3_fighter"]
-[ext_resource type="Script" path="res://scripts/touch_command_source.gd" id="4_touch"]
-
+[ext_resource type="PackedScene" path="res://scenes/fighters/ja_hyun_fighter.tscn" id="3_ja"]
+[ext_resource type="PackedScene" path="res://scenes/fighters/myo_ryung_fighter.tscn" id="4_myo"]
+[ext_resource type="Script" path="res://scripts/match_controller.gd" id="5_match"]
+[ext_resource type="Resource" path="res://assets/combat/phase1_combat_rules.tres" id="6_rules"]
+[ext_resource type="Script" path="res://scripts/touch_command_source.gd" id="7_touch"]
+[ext_resource type="Script" path="res://scripts/combat_camera.gd" id="8_camera"]
 [sub_resource type="RectangleShape2D" id="GroundShape"]
 size = Vector2(1080, 48)
-
 [sub_resource type="RectangleShape2D" id="PlatformShape"]
 size = Vector2(280, 24)
-
-[sub_resource type="RectangleShape2D" id="FighterShape"]
-size = Vector2(54, 96)
+[sub_resource type="RectangleShape2D" id="KillVertical"]
+size = Vector2(50, 1060)
+[sub_resource type="RectangleShape2D" id="KillHorizontal"]
+size = Vector2(1600, 50)
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_main")
-
 [node name="ArenaVisual" type="Node2D" parent="."]
 script = ExtResource("2_arena")
-
 [node name="World" type="Node2D" parent="."]
-
 [node name="Ground" type="StaticBody2D" parent="World"]
 position = Vector2(640, 610)
 collision_layer = 1
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="World/Ground"]
 shape = SubResource("GroundShape")
-
 [node name="Platform" type="StaticBody2D" parent="World"]
 position = Vector2(640, 430)
 collision_layer = 1
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="World/Platform"]
 shape = SubResource("PlatformShape")
-
-[node name="PlayerStub" type="CharacterBody2D" parent="World"]
+[node name="Player" parent="World" instance=ExtResource("3_ja")]
 position = Vector2(430, 520)
-collision_layer = 2
-collision_mask = 1
-script = ExtResource("3_fighter")
-display_name = "PLAYER"
-body_color = Color(0.25, 0.78, 0.5, 1)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="World/PlayerStub"]
-shape = SubResource("FighterShape")
-
-[node name="TrainingStub" type="CharacterBody2D" parent="World"]
+[node name="TrainingDummy" parent="World" instance=ExtResource("4_myo")]
 position = Vector2(850, 520)
-collision_layer = 2
-collision_mask = 1
-script = ExtResource("3_fighter")
-display_name = "TRAINING"
-body_color = Color(0.94, 0.53, 0.32, 1)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="World/TrainingStub"]
-shape = SubResource("FighterShape")
-
+[node name="KillVolumes" type="Node2D" parent="World"]
+[node name="Left" type="Area2D" parent="World/KillVolumes"]
+position = Vector2(-185, 290)
+collision_layer = 16
+collision_mask = 2
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/KillVolumes/Left"]
+shape = SubResource("KillVertical")
+[node name="Right" type="Area2D" parent="World/KillVolumes"]
+position = Vector2(1465, 290)
+collision_layer = 16
+collision_mask = 2
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/KillVolumes/Right"]
+shape = SubResource("KillVertical")
+[node name="Top" type="Area2D" parent="World/KillVolumes"]
+position = Vector2(640, -265)
+collision_layer = 16
+collision_mask = 2
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/KillVolumes/Top"]
+shape = SubResource("KillHorizontal")
+[node name="Bottom" type="Area2D" parent="World/KillVolumes"]
+position = Vector2(640, 845)
+collision_layer = 16
+collision_mask = 2
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/KillVolumes/Bottom"]
+shape = SubResource("KillHorizontal")
+[node name="MatchController" type="Node" parent="."]
+script = ExtResource("5_match")
+rules = ExtResource("6_rules")
+player = NodePath("../World/Player")
+training_dummy = NodePath("../World/TrainingDummy")
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(640, 360)
 position_smoothing_enabled = true
 position_smoothing_speed = 5.0
-
+script = ExtResource("8_camera")
+rules = ExtResource("6_rules")
 [node name="Interface" type="CanvasLayer" parent="."]
-
 [node name="TouchCommandSource" type="Control" parent="Interface"]
 layout_mode = 3
 anchors_preset = 15
@@ -73,21 +81,32 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-script = ExtResource("4_touch")
-
-[node name="CommandReadout" type="Label" parent="Interface"]
-offset_left = 110.0
+script = ExtResource("7_touch")
+[node name="MatchReadout" type="Label" parent="Interface"]
+offset_left = 24.0
 offset_top = 20.0
-offset_right = 900.0
-offset_bottom = 60.0
+offset_right = 1000.0
+offset_bottom = 54.0
 theme_override_colors/font_color = Color(0.93, 0.96, 1, 1)
 theme_override_font_sizes/font_size = 22
-text = "Phase 0 · 입력 대기"
-
+text = "자현 0% · 3 STOCK    묘령 0% · 3 STOCK"
 [node name="PhaseLabel" type="Label" parent="Interface"]
-offset_left = 110.0
-offset_top = 60.0
-offset_right = 600.0
-offset_bottom = 90.0
+offset_left = 24.0
+offset_top = 56.0
+offset_right = 900.0
+offset_bottom = 80.0
 theme_override_colors/font_color = Color(0.72, 0.78, 0.88, 1)
-text = "도형 기반 실행 기반 — 전투 판정 미구현"
+text = "Phase 1 · 코어 전투 수직 슬라이스 · 훈련 더미"
+[node name="DebugReadout" type="Label" parent="Interface"]
+offset_left = 24.0
+offset_top = 88.0
+offset_right = 900.0
+offset_bottom = 112.0
+theme_override_colors/font_color = Color(1, 0.82, 0.42, 1)
+text = "debug"
+[node name="Restart" type="Button" parent="Interface"]
+offset_left = 1120.0
+offset_top = 18.0
+offset_right = 1255.0
+offset_bottom = 58.0
+text = "재시작"

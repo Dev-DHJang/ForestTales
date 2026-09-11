@@ -1,99 +1,99 @@
 extends Control
 
-const ACTIONS: Array[StringName] = [
-	&"move_left", &"move_right", &"jump", &"dash", &"attack_light", &"attack_heavy", &"attack_special"
-]
-const SAFE_EDGE_RATIO: float = 0.065
-
+## A single cardinal pad occupies the lower-left 42% inside the 6.5% safe edge.
+const SAFE_EDGE_RATIO := 0.065
 var _touch_actions: Dictionary[int, StringName] = {}
 var _action_touch_counts: Dictionary[StringName, int] = {}
 
 
 func _ready() -> void:
-	set_process_unhandled_input(true)
 	queue_redraw()
 
 
-func _unhandled_input(event: InputEvent) -> void:
+func handle_pointer_event(event: InputEvent) -> void:
 	if event is InputEventScreenTouch:
 		var touch := event as InputEventScreenTouch
-		if touch.pressed:
-			_assign_touch(touch.index, touch.position)
-		else:
-			_release_touch(touch.index)
+		if touch.pressed: _assign(touch.index, touch.position)
+		else: _release(touch.index)
 	elif event is InputEventScreenDrag:
 		var drag := event as InputEventScreenDrag
-		var next_action: StringName = _action_for_position(drag.position)
-		if _touch_actions.get(drag.index, &"") != next_action:
-			_release_touch(drag.index)
-			if not next_action.is_empty():
-				_press_touch(drag.index, next_action)
+		var next := _action_for(drag.position)
+		if _touch_actions.get(drag.index, &"") != next:
+			_release(drag.index)
+			if not next.is_empty(): _press(drag.index, next)
+	elif event is InputEventMouseButton:
+		if OS.has_feature("mobile"): return
+		var button := event as InputEventMouseButton
+		if button.button_index == MOUSE_BUTTON_LEFT:
+			if button.pressed: _assign(-100, button.position)
+			else: _release(-100)
+	elif event is InputEventMouseMotion and (event as InputEventMouseMotion).button_mask & MOUSE_BUTTON_MASK_LEFT:
+		if OS.has_feature("mobile"): return
+		var motion := event as InputEventMouseMotion
+		var next := _action_for(motion.position)
+		if _touch_actions.get(-100, &"") != next:
+			_release(-100)
+			if not next.is_empty(): _press(-100, next)
 
 
 func release_all_touches() -> void:
-	for touch_index: int in _touch_actions.keys():
-		_release_touch(touch_index)
+	for touch_index: int in _touch_actions.keys(): _release(touch_index)
 
 
-func _assign_touch(touch_index: int, position: Vector2) -> void:
-	var action: StringName = _action_for_position(position)
-	if not action.is_empty():
-		_press_touch(touch_index, action)
+func _assign(index: int, position: Vector2) -> void:
+	var action := _action_for(position)
+	if not action.is_empty(): _press(index, action)
 
 
-func _press_touch(touch_index: int, action: StringName) -> void:
-	_touch_actions[touch_index] = action
+func _press(index: int, action: StringName) -> void:
+	_touch_actions[index] = action
 	var count: int = _action_touch_counts.get(action, 0) + 1
 	_action_touch_counts[action] = count
-	if count == 1:
-		Input.action_press(action)
+	if count == 1: Input.action_press(action)
+	print("FOREST_ARENA_TOUCH action=%s edge=press pointer=%d" % [action, index])
 
 
-func _release_touch(touch_index: int) -> void:
-	if not _touch_actions.has(touch_index):
-		return
-	var action: StringName = _touch_actions[touch_index]
-	_touch_actions.erase(touch_index)
-	var count: int = maxi(_action_touch_counts.get(action, 1) - 1, 0)
+func _release(index: int) -> void:
+	if not _touch_actions.has(index): return
+	var action: StringName = _touch_actions[index]
+	_touch_actions.erase(index)
+	var count := maxi(_action_touch_counts.get(action, 1) - 1, 0)
 	_action_touch_counts[action] = count
-	if count == 0:
-		Input.action_release(action)
+	if count == 0: Input.action_release(action)
+	print("FOREST_ARENA_TOUCH action=%s edge=release pointer=%d" % [action, index])
 
 
-func _action_for_position(position: Vector2) -> StringName:
-	var viewport_size: Vector2 = get_viewport_rect().size
-	var normalized := Vector2(position.x / viewport_size.x, position.y / viewport_size.y)
-	if normalized.y < 0.58 or normalized.x < SAFE_EDGE_RATIO or normalized.x > 1.0 - SAFE_EDGE_RATIO:
-		return &""
-	var usable_x: float = inverse_lerp(SAFE_EDGE_RATIO, 1.0 - SAFE_EDGE_RATIO, normalized.x)
-	if usable_x < 0.18:
-		return &"move_left"
-	if usable_x < 0.36:
-		return &"move_right"
-	if usable_x < 0.58:
-		return &"dash"
-	if usable_x < 0.70:
-		return &"jump"
-	if usable_x < 0.80:
-		return &"attack_light"
-	if usable_x < 0.90:
-		return &"attack_heavy"
+func _action_for(position: Vector2) -> StringName:
+	var size := get_viewport_rect().size
+	var normalized := position / size
+	if normalized.x < SAFE_EDGE_RATIO or normalized.x > 1.0 - SAFE_EDGE_RATIO or normalized.y < 0.58: return &""
+	var pad := Rect2(size.x * SAFE_EDGE_RATIO, size.y * 0.58, size.x * 0.42, size.y * 0.355)
+	if pad.has_point(position):
+		var delta := position - pad.get_center()
+		if delta.length() < minf(pad.size.x, pad.size.y) * 0.20: return &""
+		if absf(delta.x) >= absf(delta.y): return &"move_right" if delta.x > 0.0 else &"move_left"
+		return &"move_down" if delta.y > 0.0 else &"move_up"
+	var usable := inverse_lerp(size.x * 0.50, size.x * (1.0 - SAFE_EDGE_RATIO), position.x)
+	if usable < 0.20: return &"dash"
+	if usable < 0.40: return &"jump"
+	if usable < 0.60: return &"attack_light"
+	if usable < 0.80: return &"attack_heavy"
 	return &"attack_special"
 
 
 func _notification(what: int) -> void:
-	if what == NOTIFICATION_APPLICATION_FOCUS_OUT or what == NOTIFICATION_APPLICATION_PAUSED:
-		release_all_touches()
+	if what == NOTIFICATION_APPLICATION_FOCUS_OUT or what == NOTIFICATION_APPLICATION_PAUSED: release_all_touches()
 
 
 func _draw() -> void:
-	var viewport_size: Vector2 = get_viewport_rect().size
-	var labels := ["←", "→", "DASH", "JUMP", "LIGHT", "HEAVY", "SPECIAL"]
-	var bounds := [0.0, 0.18, 0.36, 0.58, 0.70, 0.80, 0.90, 1.0]
-	for index: int in labels.size():
-		var left: float = lerpf(SAFE_EDGE_RATIO, 1.0 - SAFE_EDGE_RATIO, bounds[index]) * viewport_size.x
-		var right: float = lerpf(SAFE_EDGE_RATIO, 1.0 - SAFE_EDGE_RATIO, bounds[index + 1]) * viewport_size.x
-		var rect := Rect2(left + 6.0, viewport_size.y * 0.78, right - left - 12.0, viewport_size.y * 0.18)
+	var size := get_viewport_rect().size
+	var pad := Rect2(size.x * SAFE_EDGE_RATIO, size.y * 0.58, size.x * 0.42, size.y * 0.355)
+	draw_circle(pad.get_center(), minf(pad.size.x, pad.size.y) * 0.42, Color(0.13, 0.18, 0.28, 0.72))
+	for item: Dictionary in [{"text": "↑", "offset": Vector2(-8, -42)}, {"text": "↓", "offset": Vector2(-8, 52)}, {"text": "←", "offset": Vector2(-68, 6)}, {"text": "→", "offset": Vector2(48, 6)}]:
+		draw_string(ThemeDB.fallback_font, pad.get_center() + item.offset, item.text, HORIZONTAL_ALIGNMENT_LEFT, -1, 26, Color.WHITE)
+	var labels := ["DASH", "JUMP", "LIGHT", "HEAVY", "SPECIAL"]
+	for index: int in 5:
+		var rect := Rect2(size.x * (0.51 + index * 0.095), size.y * 0.76, size.x * 0.08, size.y * 0.14)
 		draw_rect(rect, Color(0.13, 0.18, 0.28, 0.72), true)
 		draw_rect(rect, Color(0.62, 0.72, 0.86, 0.65), false, 2.0)
-		draw_string(ThemeDB.fallback_font, rect.position + Vector2(0, rect.size.y * 0.58), labels[index], HORIZONTAL_ALIGNMENT_CENTER, rect.size.x, 18, Color.WHITE)
+		draw_string(ThemeDB.fallback_font, rect.position + Vector2(0, rect.size.y * 0.58), labels[index], HORIZONTAL_ALIGNMENT_CENTER, rect.size.x, 15, Color.WHITE)
