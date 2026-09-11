@@ -27,6 +27,14 @@ description: Design original Forest Arena playable-animal character concepts, co
 - 기본 참조가 없거나 읽을 수 없거나 권리 기록상 사용할 수 없으면 그 사실을 사용자에게 알리고, 사용자 지정 자료 또는 텍스트 작화 규칙만으로 진행한다.
 - 기본 목표는 3등신 전신 콘셉트다. 사용자가 지정한 배경을 그대로 사용하며, 투명 배경이면 실제 alpha와 전신 잘림 여부를 검사한다. 체크무늬가 픽셀로 남은 RGB 파일은 `fix`이며, 투명 RGBA PNG가 확인될 때까지 최종 자산으로 등록하지 않는다.
 
+## 외형 규칙의 우선순위와 변경
+
+- 승인 로스터의 외형에 관해서는 `docs/character-appearance-v01.json`의 해당 `character_id` 항목이 유일한 권위 원본이다. 스킬의 작화 방향·프롬프트·기존 PNG·사용자 요청 중 어느 것도 이 계약의 필수·각도 한정·금지 규칙을 묵시적으로 완화하거나 대체하지 않는다.
+- 신규 캐릭터에는 완성된 입력 브리프가 시안 단계의 외형 기준이다. 승인 뒤에는 그 브리프에서 확정한 같은 필드(인간형/수인화, 필수·각도 한정 특징, 금지 신체 구조, 고정·가변 의상, 작은 화면 앵커)를 외형 계약에 기록하고, 이후 표현 소비자는 그 계약을 사용한다.
+- 승인 캐릭터의 외형 변경 요청은 먼저 변경 대상 필드, 기존값·제안값, 영향을 받는 콘셉트·초상화·아이콘·모션·아틀라스와 `character_id`/`concept_asset_id`를 작업 증적에 명시한다. 계약 JSON을 먼저 갱신할 권한과 사용자 명시 승인을 얻고 QA가 pass하기 전에는 PNG, 디자인 시트, manifest 또는 파생 표현 자산을 변경하지 않는다.
+- 사용자 승인이나 생성 모델의 결과는 시안 채택 승인일 뿐, 위 외형 계약 변경의 승인으로 해석하지 않는다. 기존 계약과 충돌하는 요청은 `redo`로 반환해 변경 범위와 승인 여부를 다시 확정한다.
+- 전투 수치, 판정, 충돌, 공격 타이밍, 승패를 외형 브리프·프롬프트·디자인 시트에 정의하거나 추론하지 않는다. 공격 실루엣은 읽기 위한 표현 요구이며 전투 계약은 contracts와 combat가 소유한다.
+
 ## 작업 흐름
 
 1. 전체 사용자 입력 양식을 제시하고 누락·모호한 값만 재질문한다. 입력과 자동 수집 메타데이터로 충돌 없는 `_workspace/character-design-draft-<slug>/` 작업 경로와 브리프를 만든다.
@@ -34,7 +42,7 @@ description: Design original Forest Arena playable-animal character concepts, co
 3. 이미지 시안이 필요한 기본 흐름에서는 imagegen으로 전신 3등신 액션 포즈를 만든다. 특정 작품, 작가, 상표, 로고 또는 참고 캐릭터의 고유 장식은 복제하지 않는다.
 4. forest-arena-qa가 입력 충족, 권리·원본성, 종·역할·공격 준비 식별성과 배경 대비를 pass, fix 또는 redo로 검토하게 한다.
 5. 시안과 QA 결과를 사용자에게 제시한다. 사용자의 명시적 승인 전에는 `assets/character/` 또는 그 manifest에 쓰지 않는다.
-6. 사용자가 시안을 승인하면 표시 이름과 소문자 kebab-case `character_id`를 묻는다. 사용자에게 ID와 등록 대상 파일을 다시 확인받은 뒤에만 PNG·디자인 시트와 `assets/character/manifest.json`을 등록한다.
+6. 사용자가 시안을 승인하면 표시 이름과 소문자 kebab-case `character_id`를 묻는다. 신규 캐릭터는 외형 계약의 동일 필드를 확정한 뒤, 사용자에게 ID·`concept_asset_id`·등록 대상 파일을 다시 확인받고 QA pass가 난 경우에만 PNG·디자인 시트와 `assets/character/manifest.json`을 등록한다.
 7. 승인 전 시안과 결정 근거는 draft 작업 경로에만 남긴다. 이후 프레임·아틀라스는 forest-arena-2d-animation, 전투 데이터는 forest-arena-contracts와 forest-arena-combat에 넘긴다.
 
 ## 산출물과 검증
