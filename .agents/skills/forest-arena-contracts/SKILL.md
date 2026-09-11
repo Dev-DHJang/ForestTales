@@ -1,6 +1,6 @@
 ---
 name: forest-arena-contracts
-description: Define versioned Forest Arena Resource, save, shared-ID, loadout, and future network contracts.
+description: 버전이 있는 Forest Arena Resource·저장·공용 ID·로드아웃·미래 네트워크 계약을 정의한다.
 ---
 
 # Forest Arena 공용 계약

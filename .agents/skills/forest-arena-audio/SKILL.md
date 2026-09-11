@@ -1,6 +1,6 @@
 ---
 name: forest-arena-audio
-description: Create and integrate Android-ready Forest Arena music and sound through replaceable semantic events.
+description: 교체 가능한 의미 이벤트로 Android 대응 Forest Arena 음악과 효과음을 제작·통합한다.
 ---
 
 # Forest Arena 오디오

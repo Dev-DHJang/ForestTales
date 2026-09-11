@@ -1,6 +1,6 @@
 ---
 name: forest-arena-network
-description: Implement Forest Arena transport, serialization, connectivity, retries, timeouts, and diagnostics after Phase 7 approval.
+description: Phase 7 승인 뒤 Forest Arena 전송·직렬화·연결·재시도·시간 제한·진단을 구현한다.
 ---
 
 # Forest Arena 네트워크

@@ -1,11 +1,14 @@
-# Forest Arena / Godot 4 Setup
+# Forest Arena / Godot 4 설정
 
-The installer copies `res://forest_arena/` into the current project and registers `ForestArenaResources` as an Autoload.
+설치기는 현재 프로젝트에 `res://forest_arena/`를 복사하고 `ForestArenaResources`를 Autoload로 등록한다.
 
-Quality settings: `high`, `medium`, `low`. Only 22 full-screen/background/illustration/FX resources are quality-tiered. UI/buttons/icons/characters/accessories remain common HQ assets.
+품질 설정은 `high`, `medium`, `low`다. 전체 화면 배경·일러스트·효과 22개만 품질별로 나뉘며 UI·버튼·아이콘·캐릭터·장신구는 공통 고품질 자산이다.
 
-Use logical IDs:
+경로가 아니라 논리 ID를 사용한다.
+
 ```gdscript
 ForestArenaResources.set_quality("medium")
 $TextureRect.texture = ForestArenaResources.load_texture("fa.background.bg.lobby.forest.town")
 ```
+
+카탈로그는 기존 `assets/character/`, `assets/ui/generated/`의 승인·소유권 경계를 바꾸지 않는다.

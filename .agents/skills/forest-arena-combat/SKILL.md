@@ -1,6 +1,6 @@
 ---
 name: forest-arena-combat
-description: Implement deterministic Forest Arena 2D movement, state, attacks, hit resolution, ring-out, and loadout behavior.
+description: 결정론적 Forest Arena 2D 이동·상태·공격·피격 판정·링아웃·로드아웃을 구현한다.
 ---
 
 # Forest Arena 전투
