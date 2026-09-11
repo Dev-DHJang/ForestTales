@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="LoadoutSelection" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/loadout_selection.gd" id="1_selection"]
+
+[resource]
+script = ExtResource("1_selection")
+character_id = &"ja-hyun"

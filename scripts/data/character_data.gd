@@ -4,7 +4,7 @@ extends Resource
 ## The sole authored Resource profile for one playable character. Detailed
 ## appearance rules live in the versioned appearance contract; visual data is
 ## presentation-only and must never decide combat timing or hit results.
-@export var schema_version: int = 1
+@export var schema_version: int = 2
 @export var character_id: StringName
 @export var display_name: String = ""
 @export var concept_asset_id: StringName
@@ -17,6 +17,7 @@ extends Resource
 @export_multiline var passive_description: String = ""
 @export var job_tree_ids: Array[StringName] = []
 @export var base_stats: CharacterStats
+@export var base_move_set: MoveSetData
 
 
 func has_unique_move_slots() -> bool:
@@ -29,7 +30,7 @@ func has_unique_move_slots() -> bool:
 
 
 func is_valid_definition() -> bool:
-	return schema_version == 1 \
+	return schema_version == 2 \
 		and not character_id.is_empty() \
 		and not display_name.is_empty() \
 		and not concept_asset_id.is_empty() \
@@ -41,4 +42,6 @@ func is_valid_definition() -> bool:
 		and has_unique_move_slots() \
 		and not passive_description.is_empty() \
 		and base_stats != null \
-		and base_stats.is_valid_base_profile()
+		and base_stats.is_valid_base_profile() \
+		and base_move_set != null \
+		and base_move_set.is_valid_definition()

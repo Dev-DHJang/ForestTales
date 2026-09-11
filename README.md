@@ -1,6 +1,6 @@
 # Forest Arena
 
-Forest Arena는 독창적인 3등신 동물 캐릭터가 싸우는 Godot 4 기반 Android 우선 2D 플랫폼 아레나 격투게임이다. 현재 저장소는 Phase 0 실행 기반을 포함한다.
+Forest Arena는 독창적인 3등신 동물 캐릭터가 싸우는 Godot 4 기반 Android 우선 2D 플랫폼 아레나 격투게임이다. 현재 저장소는 Phase 2 데이터·로드아웃 런타임 기반을 포함한다.
 
 ## 문서 우선순위
 
@@ -38,10 +38,10 @@ Forest Arena는 독창적인 3등신 동물 캐릭터가 싸우는 Godot 4 기�
 
 ## 현재 상태
 
-- 완료: 제품 문서, 17개 역할 스킬(기존 역할과 Godot UI·리소스 역할), 팀 명세, Godot 프로젝트, 의미 InputMap, 임시 2D 경기장과 Phase 0 smoke test.
+- 완료: Phase 1 결정론적 전투 vertical slice(PR #6, `665757b`), 17개 역할 하네스·Godot 리소스 카탈로그(PR #7, `038090b`), 그리고 Phase 2 versioned loadout 계약·런타임 주입.
 - 승인된 선행 콘텐츠: 자현·묘령·나비의 CharacterData와 콘셉트 등록, 세 캐릭터의 idle/run/stationary jump 모션 패키지. 이는 Phase 1 전투 완료나 현재 런타임 장면 연결을 뜻하지 않는다.
-- 공격 체계: 전체 공격 콘셉트 v01과 자동 문서 계약을 완료했다. Phase 1의 실제 공격·판정·입력 UI는 아직 구현하지 않았다.
+- 공격 체계: 세 fighter의 공격은 외부 `AttackData`·`MoveSetData` 리소스로 보존되며, Phase 1의 실제 공격·판정·입력 UI가 동작한다.
 - UI 설계 기반: 24개 `SCR_*` 화면, 61개 `IMG/*` 요구 에셋과 로컬 Penpot MCP 작업 계약을 확정했다. 실제 Godot 화면·이미지·Penpot 파일은 아직 만들지 않았다.
 - 로컬 검증 완료: Android debug APK export, arm64 에뮬레이터 설치·가로 실행·중단/복귀와 20:9 시각 검사.
 - 미확인: 실제 물리 Android 기기의 터치·중단/복귀·성능.
-- 미구현: Phase 1 전투, 승인 콘텐츠의 런타임 장면 연결, 승인 대기 공격 모션, 오디오, 데이터 로드아웃과 온라인 기능.
+- 미구현: 정식 선택 UI(SCR_06–SCR_08), 저장·성장·경제, 복수 장신구·태그 시너지, 오디오와 온라인 기능.

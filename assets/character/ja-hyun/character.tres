@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="CharacterData" load_steps=4 format=3]
+[gd_resource type="Resource" script_class="CharacterData" format=3]
 
 [ext_resource type="Script" path="res://scripts/data/character_data.gd" id="1_data"]
+[ext_resource type="Resource" path="res://assets/combat/movesets/ja_hyun_moveset.tres" id="1_lyxsk"]
 [ext_resource type="Script" path="res://scripts/data/character_stats.gd" id="2_stats"]
 [ext_resource type="Texture2D" path="res://assets/character/ja-hyun/concept/ja-hyun-concept-v01.png" id="3_image"]
 
@@ -8,17 +9,9 @@
 script = ExtResource("2_stats")
 survivability = 105.0
 weight = 1.05
-ground_speed = 300.0
-air_speed = 280.0
-jump_velocity = 520.0
-gravity = 1400.0
-dash_speed = 500.0
-dash_duration_seconds = 0.15
-air_jump_count = 1
 
 [resource]
 script = ExtResource("1_data")
-schema_version = 1
 character_id = &"ja-hyun"
 display_name = "자현"
 concept_asset_id = &"ja-hyun-concept-v01"
@@ -29,5 +22,6 @@ combat_role = "균형형 근접 격투가"
 tags = Array[StringName]([&"mouse", &"striker", &"balanced"])
 move_slot_ids = Array[StringName]([&"ja-hyun-light-combo", &"ja-hyun-heavy-sweep", &"ja-hyun-ribbon-rush"])
 passive_description = "정확한 간격 유지 뒤 이어지는 근접 압박을 지향한다. 실제 효과는 향후 PassiveData에서 정의한다."
-job_tree_ids = Array[StringName]([])
+job_tree_ids = Array[StringName]([&"ja-hyun-prototype-job"])
 base_stats = SubResource("CharacterStats_ja_hyun")
+base_move_set = ExtResource("1_lyxsk")

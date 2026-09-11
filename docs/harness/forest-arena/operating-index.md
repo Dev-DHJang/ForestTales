@@ -2,7 +2,7 @@
 
 ## 현재 운영 상태
 
-- 제품 현재 단계: Phase 0. Phase 1 전투는 아직 구현·종료 검증되지 않았다.
+- 제품 현재 단계: Phase 2 데이터·로드아웃 런타임 구현 완료; 정식 선택 UI는 이후 단계다. Phase 1 전투는 PR #6 (`665757b`)으로 종료됐다.
 - 승인된 선행 콘텐츠: 자현·묘령·나비 콘셉트와 세 캐릭터의 idle/run/jump 모션. 이들은 manifest 기반 계약 자산이며 현재 전투 장면의 권위 또는 Phase 승격 근거가 아니다.
 - 승인된 미래 제품 규칙: Story/Solo/Team/AI/Practice, 최대 8명, Team 팀당 1~4명, 장신구 등급·희귀도 없음. 현재 Phase 0 구현 범위를 확장하지 않는다.
 - 비전투 UI 기반: `docs/ui/non-combat-ui-v01.json`의 24개 화면과 `assets/ui/asset-requirements.csv`의 61개 요구 에셋. 실제 Godot 화면·이미지·Penpot 파일은 미생산이다.
@@ -54,5 +54,7 @@
 | phase-0-stabilization | 완료 | 계약·문서·Git 기준선 정합화, 전체 로컬·Android 에뮬레이터 QA와 PR #2 `develop` 병합 |
 | character-appearance-contract | 완료 | 자현·묘령·나비 외형 JSON 계약·생성 템플릿·자동 검사, PR #4 `develop` 병합 |
 | forest-arena-godot-package-v2 | 완료 | 337개 logical resource 카탈로그, `ForestArenaResources` Autoload, Godot UI·리소스 역할과 17개 역할 하네스 통합; 실제 Android 기기 미검증 |
+| phase-1-core-combat | 완료 | PR #6 `665757b` 병합, 로컬·에뮬레이터 QA 증적 유지; 실제 기기 미검증 |
+| phase-2-loadout | 진행 중 | versioned Resource·결정론적 조합·fighter runtime 주입·closeout QA |
 
 원본 `_workspace/<topic>/` 증적은 감사와 재개를 위해 이동·삭제하지 않는다. 과거 시안 경로나 버전명은 당시 의사결정 증거이므로 현재 자산 경로와 달라도 이 색인의 상태 정보로만 구분한다.

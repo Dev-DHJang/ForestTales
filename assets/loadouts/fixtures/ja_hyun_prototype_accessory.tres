@@ -1,0 +1,37 @@
+[gd_resource type="Resource" script_class="AccessoryData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/accessory_data.gd" id="1_accessory"]
+[ext_resource type="Script" path="res://scripts/data/stat_modifier.gd" id="2_modifier"]
+[ext_resource type="Script" path="res://scripts/data/move_slot_patch.gd" id="3_patch"]
+[ext_resource type="Script" path="res://scripts/data/attack_data.gd" id="4_attack"]
+
+[sub_resource type="Resource" id="StatModifier_survivability"]
+script = ExtResource("2_modifier")
+operation = 0
+value = 3.0
+
+[sub_resource type="Resource" id="AttackData_patch"]
+script = ExtResource("4_attack")
+attack_id = &"ja-hyun-light-01-prototype"
+action_id = &"attack_light"
+combo_step = 1
+startup_ticks = 4
+active_ticks = 3
+recovery_ticks = 7
+damage = 5.0
+base_knockback = 120.0
+knockback_growth = 1.6
+visual_state_id = &"attack_light_combo_01"
+
+[sub_resource type="Resource" id="MoveSlotPatch_light"]
+script = ExtResource("3_patch")
+slot_id = &"ja-hyun-light-01"
+replacement = SubResource("AttackData_patch")
+
+[resource]
+script = ExtResource("1_accessory")
+accessory_id = &"ja-hyun-prototype-accessory"
+stat_modifiers = Array[ExtResource("2_modifier")]([SubResource("StatModifier_survivability")])
+move_slot_patches = Array[ExtResource("3_patch")]([SubResource("MoveSlotPatch_light")])
+added_passive_ids = Array[StringName]([&"prototype-ribbon-charm"])
+added_tags = Array[StringName]([&"prototype-accessory"])

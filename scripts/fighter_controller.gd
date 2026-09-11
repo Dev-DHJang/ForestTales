@@ -7,8 +7,8 @@ enum State { SPAWNING, IDLE, RUN, JUMP, FALL, DASH, ATTACK_STARTUP, ATTACK_ACTIV
 
 @export var fighter_id: StringName
 @export var character_data: CharacterData
-@export var attacks: Array[AttackData] = []
-@export_range(1, 4, 1) var combo_count: int = 2
+var attacks: Array[AttackData] = []
+var combo_count: int = 2
 @export var controlled_by_input: bool = false
 @export var body_color: Color = Color("43c782")
 
@@ -35,21 +35,41 @@ var activation_serial := 0
 var diagnostic := ""
 var locked_facing := 1
 var locked_direction: CombatIntent.Direction = CombatIntent.Direction.NEUTRAL
+var runtime_profile: RuntimeCombatProfile
 
 
 func _ready() -> void:
 	spawn_position = global_position
-	if character_data == null or attacks.is_empty():
-		push_error("Fighter scene requires CharacterData and an exported AttackData array: %s" % fighter_id)
+	if character_data == null:
+		push_error("Fighter scene requires CharacterData: %s" % fighter_id)
 		set_physics_process(false)
 		return
-	air_jumps_remaining = _stats().air_jump_count
-	state = State.IDLE
+	# Expose authored external moves to contract inspection; authority still starts
+	# only after MatchController injects a RuntimeCombatProfile.
+	if character_data.base_move_set != null:
+		attacks = character_data.base_move_set.attacks()
+		combo_count = character_data.base_move_set.combo_count
+	state = State.SPAWNING
 	_sync_debug_hitbox()
 	queue_redraw()
 
 
+func configure_profile(profile: RuntimeCombatProfile) -> bool:
+	if profile == null or profile.character_id != fighter_id or not profile.is_valid_definition():
+		diagnostic = "invalid_runtime_profile"
+		return false
+	runtime_profile = profile
+	attacks = profile.move_set.attacks()
+	combo_count = profile.move_set.combo_count
+	air_jumps_remaining = _stats().air_jump_count
+	state = State.IDLE
+	set_physics_process(true)
+	return true
+
+
 func reset_for_match(rules: CombatRules) -> void:
+	if runtime_profile == null:
+		return
 	damage_percent = 0.0
 	stocks = rules.stocks_per_fighter
 	global_position = spawn_position
@@ -96,6 +116,8 @@ func consume_intent(intent: CombatIntent, rules: CombatRules) -> void:
 
 
 func step_tick(rules: CombatRules) -> void:
+	if runtime_profile == null:
+		return
 	diagnostic = ""
 	if invulnerability_ticks > 0:
 		invulnerability_ticks -= 1
@@ -362,7 +384,7 @@ func _horizontal_input() -> int:
 
 
 func _stats() -> CharacterStats:
-	return character_data.base_stats
+	return runtime_profile.stats if runtime_profile != null else character_data.base_stats
 
 
 func _sync_debug_hitbox() -> void:
