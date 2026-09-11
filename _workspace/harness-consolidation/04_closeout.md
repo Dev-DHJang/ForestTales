@@ -2,7 +2,7 @@
 
 ## 상태
 
-로컬 통합과 QA는 완료했다. 원격 PR·병합 결과는 실행 플랫폼의 확인 뒤 기록한다.
+로컬 통합과 QA, 원격 통합을 완료했다.
 
 ## 검증
 
@@ -15,4 +15,7 @@
 ## 버전 관리
 
 - 작업 브랜치: `chore/harness-consolidation`
-- commit, PR, 병합 SHA와 롤백 기준은 원격 통합 뒤 기록한다.
+- 구현 commit: `3485ccb686bf39acd7fbbcc565149447b4f030a2`
+- PR: #10 `chore: consolidate Forest Arena harness roles`
+- `develop` 병합 commit: `17b4d7a2c81f4152792569269b4dc984c31a8726`
+- 롤백은 PR #10의 revert PR로 수행한다. 원격 작업 브랜치는 보존하며 자동 삭제하지 않는다.
