@@ -14,6 +14,8 @@
 | 제품 | forest-arena-product | 제품 규칙, Phase, 범위, 수용 기준과 ADR |
 | 전투 | forest-arena-combat | 이동, 상태, 공격, 판정, 넉백, 링아웃과 로드아웃 |
 | UI | forest-arena-ui | Android 터치 UX, Camera2D, HUD와 메뉴 |
+| Godot UI | forest-arena-godot-ui | 등록된 논리 리소스를 소비하는 Godot 비전투 UI |
+| Godot 리소스 | forest-arena-godot-resources | 리소스 레지스트리, 품질 변형, Autoload와 검증 |
 | 애니메이션 | forest-arena-2d-animation | 프레임, 아틀라스, SpriteFrames와 시각 래퍼 |
 | 캐릭터 디자인 | forest-arena-character-design | 신규 전투 캐릭터 콘셉트, 사용자 승인과 승인 자산 등록 |
 | 캐릭터 모션 | forest-arena-character-motion | 승인 콘셉트의 idle, jump, run과 모션별 승인 런타임 패키지 |
@@ -33,10 +35,12 @@
 | 제품 규칙·로드맵 | product | orchestrator, qa | 미정 규칙은 proposed ADR |
 | 이동·공격·판정 | combat, qa | ui, mobile | 시각 프레임은 판정 비권위 |
 | 터치·카메라·HUD | ui, mobile, qa | combat | 전투 결과 계산 금지 |
+| Godot 리소스 카탈로그·품질·Autoload | godot-resources, contracts, qa | godot-ui, ui | `ForestArenaResources` logical ID만 소비하고 01_contract.md 선행 |
+| Godot 비전투 UI 리소스 소비 | godot-ui, ui, qa | godot-resources, mobile | Phase 게이트와 승인 상태를 우회하지 않음 |
 | Penpot 비전투 UI 설계 | product, contracts, ui, image-design, mobile, qa | orchestrator | product/contracts → ui/image-design → mobile/qa; 현재 Phase 0은 설계 기반만 |
 | Resource·ID·저장 | contracts, qa | combat, product | 01_contract.md 선행 |
 | 신규 전투 캐릭터 콘셉트 | character-design, qa | image-design, 2d-animation | 사용자 승인 전 assets/character/ 등록 금지 |
-| 승인 캐릭터 외형 경계 | character-design, contracts, qa | orchestrator | 외형 JSON이 단일 원본이며 PNG·모션 변경은 별도 승인 필요 |
+| 승인 캐릭터 외형 경계·변경 | character-design, contracts, qa | orchestrator, image-design, character-motion, 2d-animation | 외형 JSON이 단일 원본; 계약 필드·영향 자산을 먼저 확정하고 사용자 변경 승인·QA pass 전 PNG·모션·manifest를 변경하지 않음 |
 | 캐릭터 idle·jump·run 모션 | character-motion, qa | character-design, 2d-animation | 승인 콘셉트와 모션별 사용자 승인 필수 |
 | 콘셉트·정적 이미지 | image-design, qa | ui, 2d-animation | 원본성과 권리 기록 |
 | 프레임 애니메이션 | 2d-animation, qa | combat, image-design | AttackData 타이밍 소비 |
@@ -83,6 +87,7 @@ fix는 구현 생산자에게, redo는 product 또는 contracts 소유자에게 
 - 애니메이션 프레임, 프레임 이벤트, 보이는 몸·무기, UI와 소리는 피해, 상태, 넉백 또는 승패를 결정하지 않는다.
 - character-design은 최초 캐릭터 콘셉트와 승인 자산을 소유한다. image-design은 승인된 캐릭터의 초상화·아이콘과 그 밖의 정적 이미지를 소유하며, 2d-animation은 승인 콘셉트를 프레임·아틀라스로 전환한다.
 - 승인 로스터의 외형 경계는 `docs/character-appearance-v01.json`이 소유하며 character-design, character-motion, image-design, 2d-animation은 같은 캐릭터·콘셉트 ID와 필수·각도 한정·금지 규칙을 소비한다.
+- 승인 캐릭터의 외형 변경은 character-design이 변경 필드·기존값·제안값·영향 자산을 기록하고, contracts가 외형 계약 갱신을 소유하며, qa가 모든 표현 소비자와 ID 연결을 검토한다. 사용자 시안 승인만으로는 계약 변경 승인이 되지 않는다.
 - character-design은 사용자 명시 승인 후에만 `assets/character/<character-id>/concept/`과 `assets/character/manifest.json`을 갱신한다. CharacterData 등 전투 데이터화는 contracts와 combat의 별도 범위다.
 - character-motion은 manifest에 등록된 승인 콘셉트의 idle·jump·run 런타임 패키지를 소유한다. 모션별 사용자 명시 승인 전에는 `assets/character/<character-id>/animation/runtime/` 또는 manifest에 쓰지 않는다.
 - CharacterData + JobData + AccessoryData의 조합은 contracts와 combat가 함께 관리한다.
@@ -90,6 +95,7 @@ fix는 구현 생산자에게, redo는 product 또는 contracts 소유자에게 
 - 온라인, 영속 진행과 경제는 해당 Phase와 사용자 승인 전 구현하지 않는다.
 - Penpot 기준 1920×1080은 설계 참조다. Godot 런타임 논리 해상도 1280×720은 별도 승인 없이 바꾸지 않는다.
 - 비전투 화면은 `docs/ui/non-combat-ui-v01.json`, 이미지 요구는 `assets/ui/asset-requirements.csv`의 ID와 승인 상태를 따른다.
+- `res://forest_arena/`의 패키지 카탈로그는 `ForestArenaResources` logical ID로만 읽는다. 이는 기존 `assets/ui/generated/` 또는 `assets/character/`의 승인·소유권·출력 경로를 대체하지 않는다.
 - 신규 로스터 슬롯은 character-design 승인 전 최종 자산을 만들지 않고, 누락 이미지는 `IMG/*` 플레이스홀더와 `MISSING ASSETS`로 드러낸다.
 
 ## Phase 게이트

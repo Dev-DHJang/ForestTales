@@ -1,0 +1,9 @@
+{
+  "schema_version": "1.0.0",
+  "engine": "Godot 4",
+  "registry": "res://forest_arena/data/resource_registry.json",
+  "autoload": "ForestArenaResources",
+  "verify": "python tools/forest_arena/verify_godot_resources.py --project-root .",
+  "logical_assets": 337,
+  "quality_dependent": 22
+}

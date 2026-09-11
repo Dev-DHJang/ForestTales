@@ -52,7 +52,7 @@ do
   check_file "$path"
 done
 
-ROLES="orchestrator product combat ui 2d-animation character-design character-motion image-design audio mobile contracts multiplayer network qa version-control"
+ROLES="orchestrator product combat ui godot-ui godot-resources 2d-animation character-design character-motion image-design audio mobile contracts multiplayer network qa version-control"
 count=0
 for role in $ROLES
 do
@@ -73,20 +73,51 @@ do
   grep -q '^description: .\+' "$skill" ||
     fail "missing description: $skill"
 
-  for heading in "## 사용 시점" "## 필수 입력" "## 작업 흐름" "## 산출물과 검증"
-  do
-    grep -qF "$heading" "$skill" ||
-      fail "missing section '$heading': $skill"
-  done
+  case "$role" in
+    godot-ui|godot-resources)
+      grep -qF 'docs/forest_arena/GODOT_SETUP.md' "$skill" ||
+        fail "Godot skill missing setup reference: $skill"
+      grep -qF 'ForestArenaResources' "$skill" ||
+        fail "Godot skill missing resource Autoload reference: $skill"
+      ;;
+    *)
+      for heading in "## 사용 시점" "## 필수 입력" "## 작업 흐름" "## 산출물과 검증"
+      do
+        grep -qF "$heading" "$skill" ||
+          fail "missing section '$heading': $skill"
+      done
+      ;;
+  esac
 
   grep -qF "$expected" docs/harness/forest-arena/team-spec.md ||
     fail "team spec does not list $expected"
 done
 
-[ "$count" -eq 15 ] || fail "expected 15 skills, checked $count"
+[ "$count" -eq 17 ] || fail "expected 17 skills, checked $count"
 actual_count=$(find .agents/skills -name SKILL.md -type f | wc -l | tr -d ' ')
-[ "$actual_count" -eq 15 ] ||
+[ "$actual_count" -eq 17 ] ||
   fail "unexpected role skill count: $actual_count"
+
+for path in \
+  docs/forest_arena/GODOT_SETUP.md \
+  docs/forest_arena/RESOURCE_RULES.md \
+  forest_arena/scripts/forest_arena_resource_manager.gd \
+  forest_arena/data/resource_registry.json \
+  forest_arena/data/quality_profiles.json \
+  tools/forest_arena/verify_godot_resources.py \
+  harness/forest_arena_godot/codex_apply_contract.json
+do
+  check_file "$path"
+done
+
+grep -qF 'ForestArenaResources="*res://forest_arena/scripts/forest_arena_resource_manager.gd"' project.godot ||
+  fail "ForestArenaResources Autoload missing"
+grep -qF 'forest-arena-godot-ui' docs/harness/forest-arena/team-spec.md ||
+  fail "team spec missing Godot UI role"
+grep -qF 'forest-arena-godot-resources' docs/harness/forest-arena/team-spec.md ||
+  fail "team spec missing Godot resources role"
+python3 tools/forest_arena/verify_godot_resources.py --project-root . ||
+  fail "Godot resource registry verification failed"
 
 grep -q '신규 전투 캐릭터 콘셉트' docs/harness/forest-arena/team-spec.md ||
   fail "team spec missing character-design route"
@@ -95,6 +126,15 @@ grep -q '사용자 승인 전 assets/character/ 등록 금지' docs/harness/fore
 grep -qF '사용자의 명시적 승인 전에는 `assets/character/` 또는 그 manifest에 쓰지 않는다' \
   .agents/skills/forest-arena-character-design/SKILL.md ||
   fail "character-design skill missing approval gate"
+grep -qF '외형 규칙의 우선순위와 변경' \
+  .agents/skills/forest-arena-character-design/SKILL.md ||
+  fail "character-design skill missing appearance precedence rules"
+grep -qF '스킬의 작화 방향·프롬프트·기존 PNG·사용자 요청 중 어느 것도 이 계약의 필수·각도 한정·금지 규칙을 묵시적으로 완화하거나 대체하지 않는다' \
+  .agents/skills/forest-arena-character-design/SKILL.md ||
+  fail "character-design skill missing approved-appearance precedence gate"
+grep -qF '사용자 승인이나 생성 모델의 결과는 시안 채택 승인일 뿐' \
+  .agents/skills/forest-arena-character-design/SKILL.md ||
+  fail "character-design skill conflates concept and contract approval"
 for requirement in '성인 여부' '인간형/수인화 수준' '각도 한정 특징' '금지 신체 구조' '고정 의상 요소' '가변 의상 요소'
 do
   grep -qF "$requirement" .agents/skills/forest-arena-character-design/references/concept-prompt-template.md ||
@@ -110,6 +150,9 @@ do
 done
 grep -qF '승인 캐릭터 외형 경계' docs/harness/forest-arena/team-spec.md ||
   fail "team spec missing approved appearance-contract route"
+grep -qF '사용자 시안 승인만으로는 계약 변경 승인이 되지 않는다' \
+  docs/harness/forest-arena/team-spec.md ||
+  fail "team spec missing approved-character appearance change gate"
 grep -q '캐릭터 idle·jump·run 모션' docs/harness/forest-arena/team-spec.md ||
   fail "team spec missing character-motion route"
 grep -q '모션별 사용자 명시 승인 전에는 `assets/character/<character-id>/animation/runtime/` 또는 manifest에 쓰지 않는다' \
@@ -205,7 +248,8 @@ fi
 
 echo "verify-harness: PASS"
 echo "- required root, product, and operating-index documents"
-echo "- 15 role skills and frontmatter"
+echo "- 17 role skills and frontmatter, including Godot UI and resource roles"
+echo "- ForestArenaResources Autoload, resource registry, quality profiles, and package harness contract"
 echo "- team routing, Penpot workflow/templates, workspace evidence, QA states, and online gate"
 echo "- Forest Arena active names, Android identity, and legacy active path scan"
 echo "- legacy rendering term scan"
